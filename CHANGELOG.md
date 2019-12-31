@@ -18,7 +18,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Updated zend-expressive to RC1.
+- Updated mezzio to RC1.
 - Added branch alias for dev-master, pointing to 1.0-dev.
 
 ## 0.1.1 - 2015-10-10
