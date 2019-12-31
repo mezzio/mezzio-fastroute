@@ -1,11 +1,12 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-fastroute for the canonical source repository
- * @copyright Copyright (c) 2016 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-fastroute/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-fastroute for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-fastroute/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-fastroute/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Router\Exception;
+namespace Mezzio\Router\Exception;
 
 class InvalidCacheException extends RuntimeException
 {
