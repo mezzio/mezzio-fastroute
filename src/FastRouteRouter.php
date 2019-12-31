@@ -1,20 +1,21 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-fastroute for the canonical source repository
- * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (http://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-fastroute/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-fastroute for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-fastroute/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-fastroute/blob/master/LICENSE.md New BSD License
  */
 
-namespace Zend\Expressive\Router;
+namespace Mezzio\Router;
 
 use FastRoute\DataGenerator\GroupCountBased as RouteGenerator;
 use FastRoute\Dispatcher\GroupCountBased as Dispatcher;
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std as RouteParser;
 use Fig\Http\Message\RequestMethodInterface as RequestMethod;
+use Laminas\Stdlib\ArrayUtils;
+use Mezzio\Router\Exception;
 use Psr\Http\Message\ServerRequestInterface as Request;
-use Zend\Expressive\Router\Exception;
-use Zend\Stdlib\ArrayUtils;
 
 /**
  * Router implementation bridging nikic/fast-route.
