@@ -18,8 +18,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Now depends on [zendframework/zend-expressive-router](https://github.com/zendframework/zend-expressive-router)
-  instead of zendframework/zend-expressive.
+- Now depends on [mezzio/mezzio-router](https://github.com/mezzio/mezzio-router)
+  instead of mezzio/mezzio.
 
 ## 0.2.0 - 2015-10-20
 
@@ -37,7 +37,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- Updated zend-expressive to RC1.
+- Updated mezzio to RC1.
 - Added branch alias for dev-master, pointing to 1.0-dev.
 
 ## 0.1.1 - 2015-10-10
