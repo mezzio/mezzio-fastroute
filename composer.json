@@ -1,54 +1,24 @@
 {
-    "name": "zendframework/zend-expressive-fastroute",
-    "description": "FastRoute integration for Expressive",
+    "name": "mezzio/mezzio-fastroute",
+    "description": "FastRoute integration for Mezzio",
     "license": "BSD-3-Clause",
     "keywords": [
-        "expressive",
+        "laminas",
+        "mezzio",
         "FastRoute",
         "http",
         "middleware",
         "psr",
-        "psr-7",
-        "zf",
-        "zendframework",
-        "zend-expressive"
+        "psr-7"
     ],
+    "homepage": "https://mezzio.dev",
     "support": {
-        "issues": "https://github.com/zendframework/zend-expressive-fastroute/issues",
-        "source": "https://github.com/zendframework/zend-expressive-fastroute",
-        "rss": "https://github.com/zendframework/zend-expressive-fastroute/releases.atom",
-        "slack": "https://zendframework-slack.herokuapp.com",
-        "forum": "https://discourse.zendframework.com/c/questions/expressive"
-    },
-    "require": {
-        "php": "^7.1",
-        "fig/http-message-util": "^1.1.2",
-        "nikic/fast-route": "^1.2",
-        "psr/container": "^1.0",
-        "psr/http-message": "^1.0.1",
-        "zendframework/zend-expressive-router": "^3.0",
-        "zendframework/zend-stdlib": "^2.0 || ^3.1"
-    },
-    "require-dev": {
-        "malukenho/docheader": "^0.1.6",
-        "mikey179/vfsStream": "^1.6.5",
-        "phpunit/phpunit": "^7.0.2",
-        "zendframework/zend-coding-standard": "~1.0.0",
-        "zendframework/zend-diactoros": "^1.7.1",
-        "zendframework/zend-stratigility": "^3.0"
-    },
-    "conflict": {
-        "container-interop/container-interop": "<1.2.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Zend\\Expressive\\Router\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "ZendTest\\Expressive\\Router\\": "test/"
-        }
+        "docs": "https://docs.mezzio.dev/mezzio-fastroute/",
+        "issues": "https://github.com/mezzio/mezzio-fastroute/issues",
+        "source": "https://github.com/mezzio/mezzio-fastroute",
+        "rss": "https://github.com/mezzio/mezzio-fastroute/releases.atom",
+        "chat": "https://laminas.dev/chat",
+        "forum": "https://discourse.laminas.dev"
     },
     "config": {
         "sort-packages": true
@@ -58,8 +28,39 @@
             "dev-master": "3.0.x-dev",
             "dev-develop": "3.1.x-dev"
         },
-        "zf": {
-            "config-provider": "Zend\\Expressive\\Router\\FastRouteRouter\\ConfigProvider"
+        "laminas": {
+            "config-provider": "Mezzio\\Router\\FastRouteRouter\\ConfigProvider"
+        }
+    },
+    "require": {
+        "php": "^7.1",
+        "fig/http-message-util": "^1.1.2",
+        "laminas/laminas-stdlib": "^2.0 || ^3.1",
+        "laminas/laminas-zendframework-bridge": "^1.0",
+        "mezzio/mezzio-router": "^3.0",
+        "nikic/fast-route": "^1.2",
+        "psr/container": "^1.0",
+        "psr/http-message": "^1.0.1"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "~1.0.0",
+        "laminas/laminas-diactoros": "^1.7.1",
+        "laminas/laminas-stratigility": "^3.0",
+        "malukenho/docheader": "^0.1.6",
+        "mikey179/vfsstream": "^1.6.5",
+        "phpunit/phpunit": "^7.0.2"
+    },
+    "conflict": {
+        "container-interop/container-interop": "<1.2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mezzio\\Router\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MezzioTest\\Router\\": "test/"
         }
     },
     "scripts": {
@@ -73,5 +74,8 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "license-check": "docheader check src/ test/"
+    },
+    "replace": {
+        "zendframework/zend-expressive-fastroute": "self.version"
     }
 }

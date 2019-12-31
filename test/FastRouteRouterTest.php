@@ -1,30 +1,31 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-fastroute for the canonical source repository
- * @copyright Copyright (c) 2015-2017 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-fastroute/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-fastroute for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-fastroute/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-fastroute/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Expressive\Router;
+namespace MezzioTest\Router;
 
 use FastRoute\Dispatcher\GroupCountBased as Dispatcher;
 use FastRoute\RouteCollector;
 use Fig\Http\Message\RequestMethodInterface as RequestMethod;
+use Laminas\Diactoros\ServerRequest;
+use Mezzio\Router\Exception\InvalidCacheDirectoryException;
+use Mezzio\Router\Exception\InvalidCacheException;
+use Mezzio\Router\Exception\RuntimeException;
+use Mezzio\Router\FastRouteRouter;
+use Mezzio\Router\Route;
+use Mezzio\Router\RouteResult;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
 use Prophecy\Prophecy\ProphecyInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\UriInterface;
 use Psr\Http\Server\MiddlewareInterface;
-use Zend\Diactoros\ServerRequest;
-use Zend\Expressive\Router\Exception\InvalidCacheDirectoryException;
-use Zend\Expressive\Router\Exception\InvalidCacheException;
-use Zend\Expressive\Router\Exception\RuntimeException;
-use Zend\Expressive\Router\FastRouteRouter;
-use Zend\Expressive\Router\Route;
-use Zend\Expressive\Router\RouteResult;
 
 use function file_get_contents;
 use function is_file;
