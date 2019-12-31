@@ -10,8 +10,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- [#51](https://github.com/zendframework/zend-expressive-fastroute/pull/51)
-  updates the minimum supported version of zend-expressive-router to 3.0.0rc4.
+- [zendframework/zend-expressive-fastroute#51](https://github.com/zendframework/zend-expressive-fastroute/pull/51)
+  updates the minimum supported version of mezzio-router to 3.0.0rc4.
 
 ### Deprecated
 
@@ -33,8 +33,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- [#50](https://github.com/zendframework/zend-expressive-fastroute/pull/50)
-  updates the minimum supported version of zend-expressive-router to 3.0.0rc3.
+- [zendframework/zend-expressive-fastroute#50](https://github.com/zendframework/zend-expressive-fastroute/pull/50)
+  updates the minimum supported version of mezzio-router to 3.0.0rc3.
 
 ### Deprecated
 
@@ -46,8 +46,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#50](https://github.com/zendframework/zend-expressive-fastroute/pull/50)
-  fixes a referenced constant from the zend-expressive-router package.
+- [zendframework/zend-expressive-fastroute#50](https://github.com/zendframework/zend-expressive-fastroute/pull/50)
+  fixes a referenced constant from the mezzio-router package.
 
 ## 3.0.0rc2 - 2018-03-06
 
@@ -57,8 +57,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- [#49](https://github.com/zendframework/zend-expressive-fastroute/pull/49)
-  updates the minimum supported version of zend-expressive-router to 3.0.0rc2.
+- [zendframework/zend-expressive-fastroute#49](https://github.com/zendframework/zend-expressive-fastroute/pull/49)
+  updates the minimum supported version of mezzio-router to 3.0.0rc2.
 
 ### Deprecated
 
@@ -70,7 +70,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#49](https://github.com/zendframework/zend-expressive-fastroute/pull/49)
+- [zendframework/zend-expressive-fastroute#49](https://github.com/zendframework/zend-expressive-fastroute/pull/49)
   fixes how the router detects successful path-based matches when the HTTP
   method is not supported, ensuring that a correct list of allowed HTTP methods
   is generated for a route result failure.
@@ -83,8 +83,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Changed
 
-- [#47](https://github.com/zendframework/zend-expressive-fastroute/pull/47)
-  updates the package to pin to zend-expressive-router 3.0.0rc1 or later.
+- [zendframework/zend-expressive-fastroute#47](https://github.com/zendframework/zend-expressive-fastroute/pull/47)
+  updates the package to pin to mezzio-router 3.0.0rc1 or later.
 
 ### Deprecated
 
@@ -96,7 +96,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#47](https://github.com/zendframework/zend-expressive-fastroute/pull/47)
+- [zendframework/zend-expressive-fastroute#47](https://github.com/zendframework/zend-expressive-fastroute/pull/47)
   fixes an issue with how a failure result is marshaled when the path patches
   but the request method does not. The package now correctly aggregates allowed
   methods for the route result failure instance.
@@ -105,17 +105,17 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#41](https://github.com/zendframework/zend-expressive-fastroute/pull/41) and
-  [#46](https://github.com/zendframework/zend-expressive-fastroute/pull/46) add
-  support for the zend-expressive-router 3.0 series.
+- [zendframework/zend-expressive-fastroute#41](https://github.com/zendframework/zend-expressive-fastroute/pull/41) and
+  [zendframework/zend-expressive-fastroute#46](https://github.com/zendframework/zend-expressive-fastroute/pull/46) add
+  support for the mezzio-router 3.0 series.
 
-- [#45](https://github.com/zendframework/zend-expressive-fastroute/pull/45) adds
-  `Zend\Expressive\Router\FastRouteRouter\ConfigProvider`, and updates the
-  package to expose it to zend-component-installer.
+- [zendframework/zend-expressive-fastroute#45](https://github.com/zendframework/zend-expressive-fastroute/pull/45) adds
+  `Mezzio\Router\FastRouteRouter\ConfigProvider`, and updates the
+  package to expose it to laminas-component-installer.
 
 ### Changed
 
-- [#43](https://github.com/zendframework/zend-expressive-fastroute/pull/43)
+- [zendframework/zend-expressive-fastroute#43](https://github.com/zendframework/zend-expressive-fastroute/pull/43)
   updates the `match()` logic to always call `RouteResult::fromRouteFailure()`
   with an argument; previously, it would omit the argument under specific
   conditions.
@@ -126,10 +126,10 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#41](https://github.com/zendframework/zend-expressive-fastroute/pull/41)
-  removes support for the zend-expressive-router 2.0 series.
+- [zendframework/zend-expressive-fastroute#41](https://github.com/zendframework/zend-expressive-fastroute/pull/41)
+  removes support for the mezzio-router 2.0 series.
 
-- [#41](https://github.com/zendframework/zend-expressive-fastroute/pull/41)
+- [zendframework/zend-expressive-fastroute#41](https://github.com/zendframework/zend-expressive-fastroute/pull/41)
   removes support for PHP 5.6 and PHP 7.0.
 
 ### Fixed
@@ -196,8 +196,8 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#42](https://github.com/zendframework/zend-expressive-fastroute/pull/42)
-  removes support for the 3.0.0-dev versions of zend-expressive-router, as it
+- [zendframework/zend-expressive-fastroute#42](https://github.com/zendframework/zend-expressive-fastroute/pull/42)
+  removes support for the 3.0.0-dev versions of mezzio-router, as it
   contains backwards-incompatible API changes.
 
 ### Fixed
@@ -208,14 +208,14 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#40](https://github.com/zendframework/zend-expressive-fastroute/pull/40) adds
-  support for 3.0.0-dev versions of zend-expressive-router, as there are no API
+- [zendframework/zend-expressive-fastroute#40](https://github.com/zendframework/zend-expressive-fastroute/pull/40) adds
+  support for 3.0.0-dev versions of mezzio-router, as there are no API
   changes at this time.
 
 ### Changed
 
-- [#38](https://github.com/zendframework/zend-expressive-fastroute/pull/38)
-  updates the zend-stdlib dependency to also allow v2 releases, as the
+- [zendframework/zend-expressive-fastroute#38](https://github.com/zendframework/zend-expressive-fastroute/pull/38)
+  updates the laminas-stdlib dependency to also allow v2 releases, as the
   functionality we consume is the same between both major versions.
 
 ### Deprecated
@@ -234,12 +234,12 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#33](https://github.com/zendframework/zend-expressive-fastroute/pull/33)
+- [zendframework/zend-expressive-fastroute#33](https://github.com/zendframework/zend-expressive-fastroute/pull/33)
   adds PSR-11 Container Interface support.
 
 ### Changed
 
-- [#32](https://github.com/zendframework/zend-expressive-fastroute/pull/32)
+- [zendframework/zend-expressive-fastroute#32](https://github.com/zendframework/zend-expressive-fastroute/pull/32)
   changes to the standard route parser from FastRoute.
 
 ### Deprecated
@@ -258,9 +258,9 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#25](https://github.com/zendframework/zend-expressive-fastroute/pull/25)
-  adds support for zend-expressive-router 2.0. This includes a breaking change
-  to those _extending_ `Zend\Expressive\Router\ZendRouter`, as the
+- [zendframework/zend-expressive-fastroute#25](https://github.com/zendframework/zend-expressive-fastroute/pull/25)
+  adds support for mezzio-router 2.0. This includes a breaking change
+  to those _extending_ `Mezzio\Router\LaminasRouter`, as the
   `generateUri()` method now expects a third, optional argument,
   `array $options = []`.
 
@@ -283,7 +283,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#16](https://github.com/zendframework/zend-expressive-fastroute/pull/16) adds
+- [zendframework/zend-expressive-fastroute#16](https://github.com/zendframework/zend-expressive-fastroute/pull/16) adds
   support for FastRoute's caching features. Enable these with the following
   configuration:
 
@@ -302,17 +302,17 @@ All notable changes to this project will be documented in this file, in reverse 
   subsequent requests will read directly from the cache instead of any routes
   injected in the router.
 
-- [#23](https://github.com/zendframework/zend-expressive-fastroute/pull/23)
+- [zendframework/zend-expressive-fastroute#23](https://github.com/zendframework/zend-expressive-fastroute/pull/23)
   adds support for PHP 7.1.
 
 ### Changed
 
-- [#24](https://github.com/zendframework/zend-expressive-fastroute/pull/24)
+- [zendframework/zend-expressive-fastroute#24](https://github.com/zendframework/zend-expressive-fastroute/pull/24)
   updates the router to populate a successful `RouteResult` with the associated
-  `Zend\Expressive\Route` instance. This allows developers to retrieve
+  `Mezzio\Route` instance. This allows developers to retrieve
   additional metadata, such as the path, allowed methods, or options.
 
-- [#24](https://github.com/zendframework/zend-expressive-fastroute/pull/24)
+- [zendframework/zend-expressive-fastroute#24](https://github.com/zendframework/zend-expressive-fastroute/pull/24)
   updates the router to always honor `HEAD` and `OPTIONS` requests if the path
   matches, returning a success route result. Dispatchers will need to check the
   associated `Route` instance to determine if the route explicitly supported the
@@ -325,7 +325,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Removed
 
-- [#23](https://github.com/zendframework/zend-expressive-fastroute/pull/23)
+- [zendframework/zend-expressive-fastroute#23](https://github.com/zendframework/zend-expressive-fastroute/pull/23)
   removes support for PHP 5.5.
 
 ### Fixed
@@ -348,7 +348,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#19](https://github.com/zendframework/zend-expressive-fastroute/pull/19) fixes
+- [zendframework/zend-expressive-fastroute#19](https://github.com/zendframework/zend-expressive-fastroute/pull/19) fixes
   route generation for optional segments with regex char classes: e.g.
   `[/{param:my-[a-z]+}]`
 
@@ -356,7 +356,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#17](https://github.com/zendframework/zend-expressive-fastroute/pull/17) upgraded
+- [zendframework/zend-expressive-fastroute#17](https://github.com/zendframework/zend-expressive-fastroute/pull/17) upgraded
   the dependency to [`nikic/fast-route`](https://github.com/nikic/FastRoute) to
   [`^1.0.0`](https://github.com/nikic/FastRoute/releases/tag/v1.0.0).
 
@@ -376,13 +376,13 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#7](https://github.com/zendframework/zend-expressive-fastroute/pull/7) adds
+- [zendframework/zend-expressive-fastroute#7](https://github.com/zendframework/zend-expressive-fastroute/pull/7) adds
   support for merging the `defaults` passed in route options with the matched
   parameters when returning a route result. As an example, if you define a route
   as follows:
 
   ```php
-  use Zend\Expressive\Router\Route;
+  use Mezzio\Router\Route;
 
   $route = new Route(
       '/category/{category:[a-z]{3,12}[/resource/{resource:\d+}]',
@@ -400,7 +400,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
   This provides feature parity with other routing implementations.
 
-- [#14](https://github.com/zendframework/zend-expressive-fastroute/pull/14) updates
+- [zendframework/zend-expressive-fastroute#14](https://github.com/zendframework/zend-expressive-fastroute/pull/14) updates
   the FastRoute minimum version to `^0.8.0`. No BC break is expected by this change,
   but you should test your application to confirm.
 
@@ -414,11 +414,11 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#4](https://github.com/zendframework/zend-expressive-fastroute/pull/4) fixes
+- [zendframework/zend-expressive-fastroute#4](https://github.com/zendframework/zend-expressive-fastroute/pull/4) fixes
   URI generation when optional segments are in place, and ensures that if an
   optional segment with a placeholder is missing, but followed by one that is
   present, an exception is raised.
-- [#8](https://github.com/zendframework/zend-expressive-fastroute/pull/8) fixes
+- [zendframework/zend-expressive-fastroute#8](https://github.com/zendframework/zend-expressive-fastroute/pull/8) fixes
   URI generation with variable substitution when the variable declaration in the
   route uses `{X,Y}` quantification.
 
@@ -426,7 +426,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Added
 
-- [#6](https://github.com/zendframework/zend-expressive-fastroute/pull/6)
+- [zendframework/zend-expressive-fastroute#6](https://github.com/zendframework/zend-expressive-fastroute/pull/6)
   updates the FastRoute minimum version to `^0.7.0`. No BC break is expected by
   this change, but you should test your application to confirm.
 
@@ -458,7 +458,7 @@ All notable changes to this project will be documented in this file, in reverse 
 
 ### Fixed
 
-- [#3](https://github.com/zendframework/zend-expressive-fastroute/pull/3) fixes
+- [zendframework/zend-expressive-fastroute#3](https://github.com/zendframework/zend-expressive-fastroute/pull/3) fixes
   an issue in how the `RouteResult` was marshaled on success. Previously, the
   path was used for the matched route name; now the route name is properly used.
 
@@ -498,8 +498,8 @@ First stable release.
 
 ### Fixed
 
-- Now depends on [zendframework/zend-expressive-router](https://github.com/zendframework/zend-expressive-router)
-  instead of zendframework/zend-expressive.
+- Now depends on [mezzio/mezzio-router](https://github.com/mezzio/mezzio-router)
+  instead of mezzio/mezzio.
 
 ## 0.2.0 - 2015-10-20
 
@@ -517,7 +517,7 @@ First stable release.
 
 ### Fixed
 
-- Updated zend-expressive to RC1.
+- Updated mezzio to RC1.
 - Added branch alias for dev-master, pointing to 1.0-dev.
 
 ## 0.1.1 - 2015-10-10
