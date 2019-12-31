@@ -1,17 +1,18 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-fastroute for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-fastroute/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-fastroute for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-fastroute/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-fastroute/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace Zend\Expressive\Router\FastRouteRouter;
+namespace Mezzio\Router\FastRouteRouter;
 
-use Zend\Expressive\Router\FastRouteRouter;
-use Zend\Expressive\Router\FastRouteRouterFactory;
-use Zend\Expressive\Router\RouterInterface;
+use Mezzio\Router\FastRouteRouter;
+use Mezzio\Router\FastRouteRouterFactory;
+use Mezzio\Router\RouterInterface;
 
 class ConfigProvider
 {
@@ -27,6 +28,10 @@ class ConfigProvider
         return [
             'aliases' => [
                 RouterInterface::class => FastRouteRouter::class,
+
+                // Legacy Zend Framework aliases
+                \Zend\Expressive\Router\RouterInterface::class => RouterInterface::class,
+                \Zend\Expressive\Router\FastRouteRouter\FastRouteRouter::class => FastRouteRouter::class,
             ],
             'factories' => [
                 FastRouteRouter::class => FastRouteRouterFactory::class,

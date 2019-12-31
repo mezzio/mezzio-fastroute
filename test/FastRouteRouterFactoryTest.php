@@ -1,18 +1,19 @@
 <?php
+
 /**
- * @see       https://github.com/zendframework/zend-expressive-fastroute for the canonical source repository
- * @copyright Copyright (c) 2018 Zend Technologies USA Inc. (https://www.zend.com)
- * @license   https://github.com/zendframework/zend-expressive-fastroute/blob/master/LICENSE.md New BSD License
+ * @see       https://github.com/mezzio/mezzio-fastroute for the canonical source repository
+ * @copyright https://github.com/mezzio/mezzio-fastroute/blob/master/COPYRIGHT.md
+ * @license   https://github.com/mezzio/mezzio-fastroute/blob/master/LICENSE.md New BSD License
  */
 
 declare(strict_types=1);
 
-namespace ZendTest\Expressive\Router;
+namespace MezzioTest\Router;
 
+use Mezzio\Router\FastRouteRouter;
+use Mezzio\Router\FastRouteRouterFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Router\FastRouteRouter;
-use Zend\Expressive\Router\FastRouteRouterFactory;
 
 class FastRouteRouterFactoryTest extends TestCase
 {
