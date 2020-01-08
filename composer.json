@@ -13,7 +13,7 @@
     ],
     "homepage": "https://mezzio.dev",
     "support": {
-        "docs": "https://docs.mezzio.dev/mezzio-fastroute/",
+        "docs": "https://docs.mezzio.dev/mezzio/features/router/fast-route/",
         "issues": "https://github.com/mezzio/mezzio-fastroute/issues",
         "source": "https://github.com/mezzio/mezzio-fastroute",
         "rss": "https://github.com/mezzio/mezzio-fastroute/releases.atom",
