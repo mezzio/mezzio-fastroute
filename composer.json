@@ -76,6 +76,6 @@
         "license-check": "docheader check src/ test/"
     },
     "replace": {
-        "zendframework/zend-expressive-fastroute": "self.version"
+        "zendframework/zend-expressive-fastroute": "^3.0.3"
     }
 }
