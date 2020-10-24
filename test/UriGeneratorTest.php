@@ -124,7 +124,7 @@ class UriGeneratorTest extends TestCase
         ];
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fastRouter       = $this->prophesize(RouteCollector::class);
         $this->dispatcher       = $this->prophesize(Dispatcher::class);
