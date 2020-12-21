@@ -2,27 +2,24 @@
 
 All notable changes to this project will be documented in this file, in reverse chronological order by release.
 
-## 3.1.0 - TBD
+## 3.1.0 - 2020-12-21
 
-### Added
 
-- Nothing.
+-----
 
-### Changed
+### Release Notes for [3.1.0](https://github.com/mezzio/mezzio-fastroute/milestone/1)
 
-- Nothing.
 
-### Deprecated
 
-- Nothing.
+### 3.1.0
 
-### Removed
+- Total issues resolved: **0**
+- Total pull requests resolved: **1**
+- Total contributors: **1**
 
-- Nothing.
+#### Enhancement,hacktoberfest-accepted
 
-### Fixed
-
-- Nothing.
+ - [7: Bump dependencies to PHP8](https://github.com/mezzio/mezzio-fastroute/pull/7) thanks to @marcelthole
 
 ## 3.0.3 - 2019-06-20
 
