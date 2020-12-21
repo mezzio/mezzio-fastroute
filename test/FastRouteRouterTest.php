@@ -48,7 +48,7 @@ class FastRouteRouterTest extends TestCase
      */
     private $dispatchCallback;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->fastRouter = $this->prophesize(RouteCollector::class);
         $this->dispatcher = $this->prophesize(Dispatcher::class);
@@ -73,7 +73,11 @@ class FastRouteRouterTest extends TestCase
     public function testWillLazyInstantiateAFastRouteCollectorIfNoneIsProvidedToConstructor()
     {
         $router = new FastRouteRouter();
-        $this->assertAttributeInstanceOf(RouteCollector::class, 'router', $router);
+        $routeCollector = \Closure::bind(function () {
+            return $this->router;
+        }, $router, FastRouteRouter::class)();
+
+        $this->assertInstanceOf(RouteCollector::class, $routeCollector);
     }
 
     public function testAddingRouteAggregatesRoute()
@@ -81,7 +85,11 @@ class FastRouteRouterTest extends TestCase
         $route = new Route('/foo', $this->getMiddleware(), [RequestMethod::METHOD_GET]);
         $router = $this->getRouter();
         $router->addRoute($route);
-        $this->assertAttributeContains($route, 'routesToInject', $router);
+
+        $routesToInject = \Closure::bind(function () {
+            return $this->routesToInject;
+        }, $router, FastRouteRouter::class)();
+        $this->assertContains($route, $routesToInject);
     }
 
     /**

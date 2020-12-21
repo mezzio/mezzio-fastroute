@@ -22,7 +22,7 @@ class FastRouteRouterFactoryTest extends TestCase
 
     private $container;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->factory = new FastRouteRouterFactory();
         $this->container = $this->prophesize(ContainerInterface::class);
@@ -35,8 +35,15 @@ class FastRouteRouterFactoryTest extends TestCase
         $router = ($this->factory)($this->container->reveal());
 
         $this->assertInstanceOf(FastRouteRouter::class, $router);
-        $this->assertAttributeSame(false, 'cacheEnabled', $router);
-        $this->assertAttributeSame('data/cache/fastroute.php.cache', 'cacheFile', $router);
+        $cacheEnabled = \Closure::bind(function () {
+            return $this->cacheEnabled;
+        }, $router, FastRouteRouter::class)();
+        $this->assertFalse($cacheEnabled);
+
+        $cacheFile = \Closure::bind(function () {
+            return $this->cacheFile;
+        }, $router, FastRouteRouter::class)();
+        $this->assertSame('data/cache/fastroute.php.cache', $cacheFile);
     }
 
     public function testCreatesRouterWithConfig()
@@ -54,7 +61,15 @@ class FastRouteRouterFactoryTest extends TestCase
         $router = ($this->factory)($this->container->reveal());
 
         $this->assertInstanceOf(FastRouteRouter::class, $router);
-        $this->assertAttributeSame(true, 'cacheEnabled', $router);
-        $this->assertAttributeSame('/foo/bar/file-cache', 'cacheFile', $router);
+
+        $cacheEnabled = \Closure::bind(function () {
+            return $this->cacheEnabled;
+        }, $router, FastRouteRouter::class)();
+        $this->assertTrue($cacheEnabled);
+
+        $cacheFile = \Closure::bind(function () {
+            return $this->cacheFile;
+        }, $router, FastRouteRouter::class)();
+        $this->assertSame('/foo/bar/file-cache', $cacheFile);
     }
 }
