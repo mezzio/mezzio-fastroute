@@ -48,10 +48,10 @@ class FastRouteRouter implements RouterInterface
     /**
      * Template used when generating the cache file.
      */
-    public const CACHE_TEMPLATE = <<< 'EOT'
-<?php
-return %s;
-EOT;
+    public const CACHE_TEMPLATE = <<<EOT
+        <?php
+        return %s;
+        EOT;
 
     /**
      * @const string Configuration key used to enable/disable fastroute caching
@@ -307,8 +307,9 @@ EOT;
     /**
      * Checks for any missing route parameters
      *
-     * @return array with minimum required parameters if any are missing or
-     *     an empty array if none are missing
+     * @return array with minimum required parameters if any are missing or an empty array if none are missing
+     *
+     * @psalm-return list<mixed>
      */
     private function missingParameters(array $parts, array $substitutions) : array
     {

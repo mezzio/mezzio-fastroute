@@ -22,7 +22,10 @@ use function substr;
 
 class ExceptionTest extends TestCase
 {
-    public function exception() : Generator
+    /**
+     * @return iterable<string, array<int, string>>
+     */
+    public function exceptionProvider() : iterable
     {
         $namespace = substr(ExceptionInterface::class, 0, strrpos(ExceptionInterface::class, '\\') + 1);
 
@@ -35,7 +38,7 @@ class ExceptionTest extends TestCase
     }
 
     /**
-     * @dataProvider exception
+     * @dataProvider exceptionProvider
      */
     public function testExceptionIsInstanceOfExceptionInterface(string $exception) : void
     {
