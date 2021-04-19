@@ -44,6 +44,7 @@
         "laminas/laminas-stratigility": "^3.0",
         "malukenho/docheader": "^0.1.6",
         "mikey179/vfsstream": "^1.6.7",
+        "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.4.1",
         "psalm/plugin-phpunit": "^0.15.1",
         "vimeo/psalm": "^4.6"

@@ -16,12 +16,15 @@ use Mezzio\Router\Exception\RuntimeException;
 use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\Route;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ProphecyInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Throwable;
 
 class UriGeneratorTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var RouteCollector|ProphecyInterface
      */

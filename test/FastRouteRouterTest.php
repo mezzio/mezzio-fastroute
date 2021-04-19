@@ -22,6 +22,7 @@ use Mezzio\Router\Route;
 use Mezzio\Router\RouteResult;
 use org\bovigo\vfs\vfsStream;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Prophecy\Prophecy\ObjectProphecy;
 use Prophecy\Prophecy\ProphecyInterface;
 use Psr\Http\Message\ServerRequestInterface;
@@ -34,6 +35,8 @@ use function unlink;
 
 class FastRouteRouterTest extends TestCase
 {
+    use ProphecyTrait;
+
     /**
      * @var RouteCollector|ProphecyInterface
      */
