@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.6.2@bca09d74adc704c4eaee36a3c3e9d379e290fc3b">
+  <file src="src/FastRouteRouter.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>$this-&gt;dispatcherCallback</code>
+    </DocblockTypeContradiction>
+    <InvalidArgument occurrences="1"/>
+    <MissingClosureParamType occurrences="5">
+      <code>$allowedMethods</code>
+      <code>$data</code>
+      <code>$matched</code>
+      <code>$route</code>
+      <code>$route</code>
+    </MissingClosureParamType>
+    <MissingClosureReturnType occurrences="1">
+      <code>function ($matched, $route) use ($path, $method) {</code>
+    </MissingClosureReturnType>
+    <MixedArgument occurrences="11">
+      <code>$allowedMethods</code>
+      <code>$allowedMethods</code>
+      <code>$options['defaults']</code>
+      <code>$options['defaults']</code>
+      <code>$params</code>
+      <code>$params</code>
+      <code>$part[0]</code>
+      <code>$part[1]</code>
+      <code>$result[1]</code>
+      <code>$route</code>
+      <code>$route-&gt;getAllowedMethods()</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="7">
+      <code>$options['defaults']</code>
+      <code>$part[0]</code>
+      <code>$part[0]</code>
+      <code>$part[0]</code>
+      <code>$part[0]</code>
+      <code>$part[1]</code>
+      <code>$part[1]</code>
+    </MixedArrayAccess>
+    <MixedArrayOffset occurrences="3">
+      <code>$substitutions[$param]</code>
+      <code>$substitutions[$part[0]]</code>
+      <code>$substitutions[$part[0]]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="10">
+      <code>$allowedMethods</code>
+      <code>$missingParameters[]</code>
+      <code>$options</code>
+      <code>$param</code>
+      <code>$params</code>
+      <code>$part</code>
+      <code>$part</code>
+      <code>$path</code>
+      <code>$path</code>
+      <code>$route</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>Dispatcher</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="5">
+      <code>allowsMethod</code>
+      <code>getAllowedMethods</code>
+      <code>getOptions</code>
+      <code>getPath</code>
+      <code>getPath</code>
+    </MixedMethodCall>
+    <MixedOperand occurrences="2">
+      <code>$part[1]</code>
+      <code>$substitutions[$part[0]]</code>
+    </MixedOperand>
+    <MixedReturnStatement occurrences="1">
+      <code>$factory($data)</code>
+    </MixedReturnStatement>
+    <PossiblyNullPropertyAssignmentValue occurrences="1">
+      <code>$dispatcherFactory</code>
+    </PossiblyNullPropertyAssignmentValue>
+    <RedundantCastGivenDocblockType occurrences="1">
+      <code>(array) $this-&gt;router-&gt;getData()</code>
+    </RedundantCastGivenDocblockType>
+    <UnresolvableInclude occurrences="1">
+      <code>include $this-&gt;cacheFile</code>
+    </UnresolvableInclude>
+  </file>
+  <file src="src/FastRouteRouter/ConfigProvider.php">
+    <UndefinedClass occurrences="1">
+      <code>\Zend\Expressive\Router\FastRouteRouter\FastRouteRouter</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/FastRouteRouterFactory.php">
+    <MixedArgument occurrences="1">
+      <code>$config</code>
+    </MixedArgument>
+    <MixedArrayAccess occurrences="1">
+      <code>$config['router']</code>
+    </MixedArrayAccess>
+    <MixedAssignment occurrences="2">
+      <code>$config</code>
+      <code>$config</code>
+    </MixedAssignment>
+  </file>
+  <file src="test/ExceptionTest.php">
+    <InvalidLiteralArgument occurrences="1">
+      <code>ExceptionInterface::class</code>
+    </InvalidLiteralArgument>
+    <MixedInferredReturnType occurrences="1">
+      <code>Generator</code>
+    </MixedInferredReturnType>
+    <PossiblyFalseOperand occurrences="1">
+      <code>strrpos(ExceptionInterface::class, '\\')</code>
+    </PossiblyFalseOperand>
+  </file>
+  <file src="test/FastRouteRouter/ConfigProviderTest.php">
+    <RedundantCondition occurrences="1">
+      <code>assertIsArray</code>
+    </RedundantCondition>
+  </file>
+  <file src="test/FastRouteRouterFactoryTest.php">
+    <MissingClosureReturnType occurrences="4">
+      <code>function () {</code>
+      <code>function () {</code>
+      <code>function () {</code>
+      <code>function () {</code>
+    </MissingClosureReturnType>
+    <MissingPropertyType occurrences="1">
+      <code>$container</code>
+    </MissingPropertyType>
+    <MissingReturnType occurrences="2">
+      <code>testCreatesRouterWithConfig</code>
+      <code>testCreatesRouterWithEmptyConfig</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="2">
+      <code>$this-&gt;container-&gt;reveal()</code>
+      <code>$this-&gt;container-&gt;reveal()</code>
+    </MixedArgument>
+    <MixedMethodCall occurrences="8">
+      <code>get</code>
+      <code>has</code>
+      <code>has</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+    </MixedMethodCall>
+    <PossiblyInvalidFunctionCall occurrences="4"/>
+    <UndefinedThisPropertyFetch occurrences="4">
+      <code>$this-&gt;cacheEnabled</code>
+      <code>$this-&gt;cacheEnabled</code>
+      <code>$this-&gt;cacheFile</code>
+      <code>$this-&gt;cacheFile</code>
+    </UndefinedThisPropertyFetch>
+  </file>
+  <file src="test/FastRouteRouterTest.php">
+    <MissingClosureReturnType occurrences="3">
+      <code>function () {</code>
+      <code>function () {</code>
+      <code>function () {</code>
+    </MissingClosureReturnType>
+    <MissingParamType occurrences="2">
+      <code>$method</code>
+      <code>$path</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="38">
+      <code>createCachingRouter</code>
+      <code>createServerRequestProphecy</code>
+      <code>generatedUriProvider</code>
+      <code>idemPotentMethods</code>
+      <code>testAddingRouteAggregatesRoute</code>
+      <code>testCanGenerateUriFromRoutes</code>
+      <code>testCustomDispatcherCallback</code>
+      <code>testExceptionWhenCacheDirectoryDoesNotExist</code>
+      <code>testExceptionWhenCacheDirectoryIsNotWritable</code>
+      <code>testExceptionWhenCacheFileExistsAndIsWritableButContainsNotAnArray</code>
+      <code>testExceptionWhenCacheFileExistsButIsNotWritable</code>
+      <code>testFastRouteCache</code>
+      <code>testGenerateUriRaisesExceptionForMissingMandatoryParameters</code>
+      <code>testGenerateUriRaisesExceptionForNotFoundRoute</code>
+      <code>testGeneratingUriInjectsRouteIntoFastRoute</code>
+      <code>testGetAllAllowedMethods</code>
+      <code>testIfRouteSpecifiesAnyHttpMethodFastRouteIsPassedHardCodedListOfMethods</code>
+      <code>testMatchFailureDueToHttpMethodReturnsRouteResultWithAllowedMethods</code>
+      <code>testMatchFailureNotDueToHttpMethodReturnsGenericRouteFailureResult</code>
+      <code>testMatchWithUrlEncodedSpecialChars</code>
+      <code>testMatchedCorrectRoute</code>
+      <code>testMatchedRouteParamsOverrideDefaultParams</code>
+      <code>testMatchedRouteResultContainsRoute</code>
+      <code>testMatchingInjectsRouteIntoFastRoute</code>
+      <code>testMatchingRouteShouldReturnSuccessfulRouteResult</code>
+      <code>testOptionsPassedToGenerateUriOverrideThoseFromRoute</code>
+      <code>testReturnedRouteResultShouldContainRouteName</code>
+      <code>testRouteNotSpecifyingGetOrHeadDoesMatcheshHead</code>
+      <code>testRouteNotSpecifyingOptionsGetOrHeadMatchesOptions</code>
+      <code>testRouteNotSpecifyingOptionsImpliesOptionsIsSupportedAndMatchesWhenGetOrHeadIsAllowed</code>
+      <code>testRouteResultContainsDefaultAndMatchedParams</code>
+      <code>testRouteSpecifyingGetDoesNotMatchHead</code>
+      <code>testUriGenerationSubstitutionsWithDefaultOptions</code>
+      <code>testUriGenerationSubstitutionsWithDefaultsAndOptionalParameters</code>
+      <code>testUriGenerationSubstitutionsWithPartialDefaultsAndOptionalParameters</code>
+      <code>testWillLazyInstantiateAFastRouteCollectorIfNoneIsProvidedToConstructor</code>
+      <code>uriGeneratorDataProvider</code>
+      <code>uriGeneratorWithPartialDefaultsDataProvider</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="5">
+      <code>$generateArgs</code>
+      <code>$request-&gt;reveal()</code>
+      <code>$route</code>
+      <code>$routesToInject</code>
+      <code>$this-&gt;fastRouter-&gt;reveal()</code>
+    </MixedArgument>
+    <MixedAssignment occurrences="8">
+      <code>$request</code>
+      <code>$request</code>
+      <code>$result</code>
+      <code>$route</code>
+      <code>$route</code>
+      <code>$router1</code>
+      <code>$router2</code>
+      <code>$routesToInject</code>
+    </MixedAssignment>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <MixedMethodCall occurrences="23">
+      <code>getMatchedRoute</code>
+      <code>match</code>
+      <code>match</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>reveal</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>shouldBeCalled</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+      <code>willReturn</code>
+    </MixedMethodCall>
+    <PossiblyFalseReference occurrences="2">
+      <code>getMiddleware</code>
+      <code>getMiddleware</code>
+    </PossiblyFalseReference>
+    <PossiblyInvalidFunctionCall occurrences="2"/>
+    <PossiblyNullReference occurrences="2">
+      <code>getMiddleware</code>
+      <code>getMiddleware</code>
+    </PossiblyNullReference>
+    <PossiblyUndefinedMethod occurrences="19">
+      <code>addRoute</code>
+      <code>addRoute</code>
+      <code>addRoute</code>
+      <code>addRoute</code>
+      <code>addRoute</code>
+      <code>addRoute</code>
+      <code>addRoute</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>dispatch</code>
+      <code>getData</code>
+      <code>getData</code>
+      <code>getData</code>
+      <code>getData</code>
+      <code>getData</code>
+      <code>reveal</code>
+      <code>reveal</code>
+    </PossiblyUndefinedMethod>
+    <UndefinedThisPropertyFetch occurrences="2">
+      <code>$this-&gt;router</code>
+      <code>$this-&gt;routesToInject</code>
+    </UndefinedThisPropertyFetch>
+  </file>
+  <file src="test/UriGeneratorTest.php">
+    <MissingClosureReturnType occurrences="1">
+      <code>function () {</code>
+    </MissingClosureReturnType>
+    <MissingParamType occurrences="4">
+      <code>$expected</code>
+      <code>$message</code>
+      <code>$path</code>
+      <code>$substitutions</code>
+    </MissingParamType>
+    <MissingReturnType occurrences="1">
+      <code>testRoutes</code>
+    </MissingReturnType>
+    <MixedArgument occurrences="5">
+      <code>$expected</code>
+      <code>$message</code>
+      <code>$path</code>
+      <code>$substitutions</code>
+      <code>$substitutions</code>
+    </MixedArgument>
+    <MixedInferredReturnType occurrences="1">
+      <code>array</code>
+    </MixedInferredReturnType>
+    <PossiblyUndefinedMethod occurrences="1">
+      <code>reveal</code>
+    </PossiblyUndefinedMethod>
+  </file>
+</files>

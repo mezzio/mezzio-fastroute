@@ -44,7 +44,10 @@
         "laminas/laminas-stratigility": "^3.0",
         "malukenho/docheader": "^0.1.6",
         "mikey179/vfsstream": "^1.6.7",
-        "phpunit/phpunit": "^9.4.1"
+        "phpspec/prophecy-phpunit": "^2.0",
+        "phpunit/phpunit": "^9.4.1",
+        "psalm/plugin-phpunit": "^0.15.1",
+        "vimeo/psalm": "^4.6"
     },
     "conflict": {
         "container-interop/container-interop": "<1.2.0"
@@ -69,7 +72,8 @@
         "cs-fix": "phpcbf",
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
-        "license-check": "docheader check src/ test/"
+        "license-check": "docheader check src/ test/",
+        "static-analysis": "psalm --shepherd --stats"
     },
     "replace": {
         "zendframework/zend-expressive-fastroute": "^3.0.3"

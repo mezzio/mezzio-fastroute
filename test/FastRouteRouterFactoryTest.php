@@ -13,10 +13,13 @@ namespace MezzioTest\Router;
 use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\FastRouteRouterFactory;
 use PHPUnit\Framework\TestCase;
+use Prophecy\PhpUnit\ProphecyTrait;
 use Psr\Container\ContainerInterface;
 
 class FastRouteRouterFactoryTest extends TestCase
 {
+    use ProphecyTrait;
+
     /** @var FastRouteRouterFactory */
     private $factory;
 

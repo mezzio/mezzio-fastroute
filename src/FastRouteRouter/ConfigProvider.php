@@ -16,6 +16,9 @@ use Mezzio\Router\RouterInterface;
 
 class ConfigProvider
 {
+    /**
+     * @return array<string, mixed>
+     */
     public function __invoke() : array
     {
         return [
@@ -23,6 +26,9 @@ class ConfigProvider
         ];
     }
 
+    /**
+     * @return array<string, string[]>
+     */
     public function getDependencies() : array
     {
         return [
