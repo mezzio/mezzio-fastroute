@@ -19,24 +19,16 @@ class UriGeneratorTest extends TestCase
 {
     use ProphecyTrait;
 
-    /**
-     * @var RouteCollector|ProphecyInterface
-     */
+    /** @var RouteCollector|ProphecyInterface */
     private $fastRouter;
 
-    /**
-     * @var Dispatcher|ProphecyInterface
-     */
+    /** @var Dispatcher|ProphecyInterface */
     private $dispatcher;
 
-    /**
-     * @var callable
-     */
+    /** @var callable */
     private $dispatchCallback;
 
-    /**
-     * @var FastRouteRouter
-     */
+    /** @var FastRouteRouter */
     private $router;
 
     /**
@@ -141,7 +133,7 @@ class UriGeneratorTest extends TestCase
         );
     }
 
-    private function getMiddleware() : MiddlewareInterface
+    private function getMiddleware(): MiddlewareInterface
     {
         return $this->prophesize(MiddlewareInterface::class)->reveal();
     }
@@ -164,7 +156,6 @@ class UriGeneratorTest extends TestCase
 
     /**
      * @param class-string<Throwable> $expectedException
-     *
      * @dataProvider exceptionalRoutes
      */
     public function testExceptionalRoutes(
