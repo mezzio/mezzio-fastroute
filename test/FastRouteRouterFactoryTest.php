@@ -9,6 +9,7 @@ use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\FastRouteRouterFactory;
 use PHPUnit\Framework\TestCase;
 use Prophecy\PhpUnit\ProphecyTrait;
+use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 
 class FastRouteRouterFactoryTest extends TestCase
@@ -18,7 +19,7 @@ class FastRouteRouterFactoryTest extends TestCase
     /** @var FastRouteRouterFactory */
     private $factory;
 
-    /** @var ContainerInterface */
+    /** @var ObjectProphecy<ContainerInterface> */
     private $container;
 
     protected function setUp(): void
