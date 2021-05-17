@@ -1,7 +1,6 @@
 {
     "name": "mezzio/mezzio-fastroute",
     "description": "FastRoute integration for Mezzio",
-    "license": "BSD-3-Clause",
     "keywords": [
         "laminas",
         "mezzio",
@@ -12,22 +11,7 @@
         "psr-7"
     ],
     "homepage": "https://mezzio.dev",
-    "support": {
-        "docs": "https://docs.mezzio.dev/mezzio/features/router/fast-route/",
-        "issues": "https://github.com/mezzio/mezzio-fastroute/issues",
-        "source": "https://github.com/mezzio/mezzio-fastroute",
-        "rss": "https://github.com/mezzio/mezzio-fastroute/releases.atom",
-        "chat": "https://laminas.dev/chat",
-        "forum": "https://discourse.laminas.dev"
-    },
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "laminas": {
-            "config-provider": "Mezzio\\Router\\FastRouteRouter\\ConfigProvider"
-        }
-    },
+    "license": "BSD-3-Clause",
     "require": {
         "php": "^7.3 || ~8.0.0",
         "fig/http-message-util": "^1.1.2",
@@ -37,6 +21,12 @@
         "nikic/fast-route": "^1.2",
         "psr/container": "^1.0",
         "psr/http-message": "^1.0.1"
+    },
+    "replace": {
+        "zendframework/zend-expressive-fastroute": "^3.0.3"
+    },
+    "conflict": {
+        "container-interop/container-interop": "<1.2.0"
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~1.0.0",
@@ -49,8 +39,13 @@
         "psalm/plugin-phpunit": "^0.15.1",
         "vimeo/psalm": "^4.6"
     },
-    "conflict": {
-        "container-interop/container-interop": "<1.2.0"
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "laminas": {
+            "config-provider": "Mezzio\\Router\\FastRouteRouter\\ConfigProvider"
+        }
     },
     "autoload": {
         "psr-4": {
@@ -70,12 +65,17 @@
         ],
         "cs-check": "phpcs",
         "cs-fix": "phpcbf",
-        "test": "phpunit --colors=always",
-        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "license-check": "docheader check src/ test/",
-        "static-analysis": "psalm --shepherd --stats"
+        "static-analysis": "psalm --shepherd --stats",
+        "test": "phpunit --colors=always",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml"
     },
-    "replace": {
-        "zendframework/zend-expressive-fastroute": "^3.0.3"
+    "support": {
+        "issues": "https://github.com/mezzio/mezzio-fastroute/issues",
+        "forum": "https://discourse.laminas.dev",
+        "chat": "https://laminas.dev/chat",
+        "source": "https://github.com/mezzio/mezzio-fastroute",
+        "docs": "https://docs.mezzio.dev/mezzio/features/router/fast-route/",
+        "rss": "https://github.com/mezzio/mezzio-fastroute/releases.atom"
     }
 }
