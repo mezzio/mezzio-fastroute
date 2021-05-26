@@ -14,7 +14,7 @@ class ImplicitMethodsIntegrationTest extends RouterIntegrationTest
     /**
      * @return FastRouteRouter
      */
-    public function getRouter() : RouterInterface
+    public function getRouter(): RouterInterface
     {
         return new FastRouteRouter();
     }
@@ -22,7 +22,7 @@ class ImplicitMethodsIntegrationTest extends RouterIntegrationTest
     /**
      * @return Generator<string, array{0: string, 1: array<string, mixed>, 2: string, 3: array<string, mixed>}>
      */
-    public function implicitRoutesAndRequests() : Generator
+    public function implicitRoutesAndRequests(): Generator
     {
         // @codingStandardsIgnoreStart
         //                  route                     route options, request       params

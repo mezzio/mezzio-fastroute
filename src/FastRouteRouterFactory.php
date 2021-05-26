@@ -22,7 +22,7 @@ use Psr\Container\ContainerInterface;
  */
 class FastRouteRouterFactory
 {
-    public function __invoke(ContainerInterface $container)
+    public function __invoke(ContainerInterface $container): FastRouteRouter
     {
         $config = $container->has('config')
             ? $container->get('config')

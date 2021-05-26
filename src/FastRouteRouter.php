@@ -27,6 +27,7 @@ use function is_dir;
 use function is_string;
 use function is_writable;
 use function preg_match;
+use function rawurldecode;
 use function restore_error_handler;
 use function set_error_handler;
 use function sprintf;
@@ -85,9 +86,7 @@ class FastRouteRouter implements RouterInterface
      */
     private $cacheFile = 'data/cache/fastroute.php.cache';
 
-    /**
-     * @var callable A factory callback that can return a dispatcher.
-     */
+    /** @var callable A factory callback that can return a dispatcher. */
     private $dispatcherCallback;
 
     /**
@@ -145,9 +144,9 @@ class FastRouteRouter implements RouterInterface
      * @param array $config Array of custom configuration options.
      */
     public function __construct(
-        RouteCollector $router = null,
-        callable $dispatcherFactory = null,
-        array $config = null
+        ?RouteCollector $router = null,
+        ?callable $dispatcherFactory = null,
+        ?array $config = null
     ) {
         if (null === $router) {
             $router = $this->createRouter();
@@ -164,7 +163,7 @@ class FastRouteRouter implements RouterInterface
      *
      * @param null|array $config Array of custom configuration options.
      */
-    private function loadConfig(array $config = null) : void
+    private function loadConfig(?array $config = null): void
     {
         if (null === $config) {
             return;
@@ -190,12 +189,12 @@ class FastRouteRouter implements RouterInterface
      * list or Route::HTTP_METHOD_ANY) and the path, and uses the path as
      * the name (to allow later lookup of the middleware).
      */
-    public function addRoute(Route $route) : void
+    public function addRoute(Route $route): void
     {
         $this->routesToInject[] = $route;
     }
 
-    public function match(Request $request) : RouteResult
+    public function match(Request $request): RouteResult
     {
         // Inject any pending routes
         $this->injectRoutes();
@@ -225,12 +224,11 @@ class FastRouteRouter implements RouterInterface
      * @param array $options Key/value option pairs to pass to the router for
      *     purposes of generating a URI; takes precedence over options present
      *     in route used to generate URI.
-     *
      * @return string URI path generated.
-     * @throws Exception\RuntimeException if the route name is not known
+     * @throws Exception\RuntimeException If the route name is not known
      *     or a parameter value does not match its regex.
      */
-    public function generateUri(string $name, array $substitutions = [], array $options = []) : string
+    public function generateUri(string $name, array $substitutions = [], array $options = []): string
     {
         // Inject any pending routes
         $this->injectRoutes();
@@ -302,10 +300,9 @@ class FastRouteRouter implements RouterInterface
      * Checks for any missing route parameters
      *
      * @return array with minimum required parameters if any are missing or an empty array if none are missing
-     *
      * @psalm-return list<mixed>
      */
-    private function missingParameters(array $parts, array $substitutions) : array
+    private function missingParameters(array $parts, array $substitutions): array
     {
         $missingParameters = [];
 
@@ -334,9 +331,9 @@ class FastRouteRouter implements RouterInterface
     /**
      * Create a default FastRoute Collector instance
      */
-    private function createRouter() : RouteCollector
+    private function createRouter(): RouteCollector
     {
-        return new RouteCollector(new RouteParser, new RouteGenerator);
+        return new RouteCollector(new RouteParser(), new RouteGenerator());
     }
 
     /**
@@ -347,10 +344,8 @@ class FastRouteRouter implements RouterInterface
      * approach is done to allow testing against the dispatcher.
      *
      * @param array|object $data Data from RouteCollection::getData()
-     *
-     * @return Dispatcher
      */
-    private function getDispatcher($data) : Dispatcher
+    private function getDispatcher($data): Dispatcher
     {
         if (! $this->dispatcherCallback) {
             $this->dispatcherCallback = $this->createDispatcherCallback();
@@ -364,7 +359,7 @@ class FastRouteRouter implements RouterInterface
     /**
      * Return a default implementation of a callback that can return a Dispatcher.
      */
-    private function createDispatcherCallback() : callable
+    private function createDispatcherCallback(): callable
     {
         return function ($data) {
             return new GroupCountBased($data);
@@ -377,7 +372,7 @@ class FastRouteRouter implements RouterInterface
      * If the failure was due to the HTTP method, passes the allowed HTTP
      * methods to the factory.
      */
-    private function marshalFailedRoute(array $result) : RouteResult
+    private function marshalFailedRoute(array $result): RouteResult
     {
         if ($result[0] === Dispatcher::METHOD_NOT_ALLOWED) {
             return RouteResult::fromRouteFailure($result[1]);
@@ -389,7 +384,7 @@ class FastRouteRouter implements RouterInterface
     /**
      * Marshals a route result based on the results of matching and the current HTTP method.
      */
-    private function marshalMatchedRoute(array $result, string $method) : RouteResult
+    private function marshalMatchedRoute(array $result, string $method): RouteResult
     {
         $path  = $result[1];
         $route = array_reduce($this->routes, function ($matched, $route) use ($path, $method) {
@@ -425,7 +420,7 @@ class FastRouteRouter implements RouterInterface
     /**
      * Inject queued Route instances into the underlying router.
      */
-    private function injectRoutes() : void
+    private function injectRoutes(): void
     {
         foreach ($this->routesToInject as $index => $route) {
             $this->injectRoute($route);
@@ -436,7 +431,7 @@ class FastRouteRouter implements RouterInterface
     /**
      * Inject a Route instance into the underlying router.
      */
-    private function injectRoute(Route $route) : void
+    private function injectRoute(Route $route): void
     {
         // Filling the routes' hash-map is required by the `generateUri` method
         $this->routes[$route->getName()] = $route;
@@ -461,7 +456,7 @@ class FastRouteRouter implements RouterInterface
      *
      * If caching is enabled, store the freshly generated data to file.
      */
-    private function getDispatchData() : array
+    private function getDispatchData(): array
     {
         if ($this->hasCache) {
             return $this->dispatchData;
@@ -480,9 +475,9 @@ class FastRouteRouter implements RouterInterface
      * Load dispatch data from cache
      *
      * @throws Exception\InvalidCacheException If the cache file contains
-     *     invalid data
+     *     invalid data.
      */
-    private function loadDispatchData() : void
+    private function loadDispatchData(): void
     {
         set_error_handler(function () {
         }, E_WARNING); // suppress php warnings
@@ -514,7 +509,7 @@ class FastRouteRouter implements RouterInterface
      * @throws Exception\InvalidCacheDirectoryException If the cache directory
      *     is not writable.
      * @throws Exception\InvalidCacheException If the cache file exists but is
-     *     not writable
+     *     not writable.
      */
     private function cacheDispatchData(array $dispatchData)
     {
@@ -547,9 +542,9 @@ class FastRouteRouter implements RouterInterface
         );
     }
 
-    private function marshalMethodNotAllowedResult(array $result) : RouteResult
+    private function marshalMethodNotAllowedResult(array $result): RouteResult
     {
-        $path = $result[1];
+        $path           = $result[1];
         $allowedMethods = array_reduce($this->routes, function ($allowedMethods, $route) use ($path) {
             if ($path !== $route->getPath()) {
                 return $allowedMethods;
