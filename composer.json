@@ -42,7 +42,7 @@
         "laminas/laminas-coding-standard": "~2.2.0",
         "laminas/laminas-diactoros": "^2.5.0",
         "laminas/laminas-stratigility": "^3.0",
-        "mikey179/vfsstream": "^1.6.7",
+        "mikey179/vfsstream": "^1.6.10",
         "phpspec/prophecy-phpunit": "^2.0",
         "phpunit/phpunit": "^9.4.1",
         "psalm/plugin-phpunit": "^0.15.1",
