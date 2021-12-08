@@ -32,7 +32,6 @@
         "php": "^7.3 || ~8.0.0 || ~8.1.0",
         "fig/http-message-util": "^1.1.2",
         "laminas/laminas-stdlib": "^2.0 || ^3.1",
-        "laminas/laminas-zendframework-bridge": "^1.0",
         "mezzio/mezzio-router": "^3.7",
         "nikic/fast-route": "^1.2",
         "psr/container": "^1.0",
@@ -49,7 +48,8 @@
         "vimeo/psalm": "^4.6"
     },
     "conflict": {
-        "container-interop/container-interop": "<1.2.0"
+        "container-interop/container-interop": "<1.2.0",
+        "zendframework/zend-expressive-fastroute": "*"
     },
     "autoload": {
         "psr-4": {
@@ -71,8 +71,5 @@
         "test": "phpunit --colors=always",
         "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
         "static-analysis": "psalm --shepherd --stats"
-    },
-    "replace": {
-        "zendframework/zend-expressive-fastroute": "^3.0.3"
     }
 }
