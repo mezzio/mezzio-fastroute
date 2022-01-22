@@ -80,11 +80,9 @@
     <UnresolvableInclude occurrences="1">
       <code>include $this-&gt;cacheFile</code>
     </UnresolvableInclude>
-  </file>
-  <file src="src/FastRouteRouter/ConfigProvider.php">
-    <UndefinedClass occurrences="1">
-      <code>\Zend\Expressive\Router\FastRouteRouter\FastRouteRouter</code>
-    </UndefinedClass>
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$missingParameters</code>
+    </MixedArgumentTypeCoercion>
   </file>
   <file src="src/FastRouteRouterFactory.php">
     <MixedArgument occurrences="1">
