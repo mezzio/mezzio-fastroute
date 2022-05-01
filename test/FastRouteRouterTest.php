@@ -201,6 +201,7 @@ class FastRouteRouterTest extends TestCase
             'encoded-space'   => ['/foo/{id:.+}', '/foo/b%20ar', 'b ar'],
             'encoded-slash'   => ['/foo/{id:.+}', '/foo/b%2Fr', 'b/r'],
             'encoded-unicode' => ['/foo/{id:.+}', '/foo/bar-%E6%B8%AC%E8%A9%A6', 'bar-測試'],
+            'encoded-unicode-regex' => ['/foo/{id:[\w\-\%]+}', '/foo/bar-%E6%B8%AC%E8%A9%A6', 'bar-測試'],
             'encoded-regex'   => ['/foo/{id:bär}', '/foo/b%C3%A4r', 'bär'],
             'unencoded-regex' => ['/foo/{id:bär}', '/foo/bär', 'bär'],
         ];
