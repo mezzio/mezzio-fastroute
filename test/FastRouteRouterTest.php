@@ -45,9 +45,7 @@ class FastRouteRouterTest extends TestCase
     {
         $this->fastRouter       = $this->prophesize(RouteCollector::class);
         $this->dispatcher       = $this->prophesize(Dispatcher::class);
-        $this->dispatchCallback = function () {
-            return $this->dispatcher->reveal();
-        };
+        $this->dispatchCallback = fn() => $this->dispatcher->reveal();
     }
 
     private function getRouter(): FastRouteRouter
@@ -66,9 +64,7 @@ class FastRouteRouterTest extends TestCase
     public function testWillLazyInstantiateAFastRouteCollectorIfNoneIsProvidedToConstructor(): void
     {
         $router         = new FastRouteRouter();
-        $routeCollector = Closure::bind(function () {
-            return $this->router;
-        }, $router, FastRouteRouter::class)();
+        $routeCollector = Closure::bind(fn() => $this->router, $router, FastRouteRouter::class)();
 
         $this->assertInstanceOf(RouteCollector::class, $routeCollector);
     }
@@ -79,9 +75,7 @@ class FastRouteRouterTest extends TestCase
         $router = $this->getRouter();
         $router->addRoute($route);
 
-        $routesToInject = Closure::bind(function () {
-            return $this->routesToInject;
-        }, $router, FastRouteRouter::class)();
+        $routesToInject = Closure::bind(fn() => $this->routesToInject, $router, FastRouteRouter::class)();
         $this->assertContains($route, $routesToInject);
     }
 
@@ -104,9 +98,7 @@ class FastRouteRouterTest extends TestCase
         $uri->getPath()->willReturn('/foo');
 
         $request = $this->prophesize(ServerRequestInterface::class);
-        $request->getUri()->will(function () use ($uri) {
-            return $uri->reveal();
-        });
+        $request->getUri()->will(fn(): object => $uri->reveal());
         $request->getMethod()->willReturn(RequestMethod::METHOD_GET);
 
         $router->match($request->reveal());
@@ -636,9 +628,7 @@ class FastRouteRouterTest extends TestCase
         $uri->getPath()->willReturn($path);
 
         $request = $this->prophesize(ServerRequestInterface::class);
-        $request->getUri()->will(function () use ($uri) {
-            return $uri->reveal();
-        });
+        $request->getUri()->will(fn(): object => $uri->reveal());
 
         $request->getMethod()->willReturn($method);
 
