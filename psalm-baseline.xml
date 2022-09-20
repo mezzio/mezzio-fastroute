@@ -13,7 +13,7 @@
       <code>$route</code>
     </MissingClosureParamType>
     <MissingClosureReturnType occurrences="1">
-      <code>function ($matched, $route) use ($path, $method) {</code>
+      <code>static function ($matched, $route) use ($path, $method) {</code>
     </MissingClosureReturnType>
     <MixedArgument occurrences="11">
       <code>$allowedMethods</code>
@@ -114,10 +114,7 @@
   </file>
   <file src="test/FastRouteRouterFactoryTest.php">
     <MissingClosureReturnType occurrences="4">
-      <code>function () {</code>
-      <code>function () {</code>
-      <code>function () {</code>
-      <code>function () {</code>
+      <code>fn()</code>
     </MissingClosureReturnType>
     <MissingPropertyType occurrences="1">
       <code>$container</code>
@@ -150,9 +147,7 @@
   </file>
   <file src="test/FastRouteRouterTest.php">
     <MissingClosureReturnType occurrences="3">
-      <code>function () {</code>
-      <code>function () {</code>
-      <code>function () {</code>
+      <code>fn()</code>
     </MissingClosureReturnType>
     <MissingParamType occurrences="2">
       <code>$method</code>
@@ -279,8 +274,8 @@
     </UndefinedThisPropertyFetch>
   </file>
   <file src="test/UriGeneratorTest.php">
-    <MissingClosureReturnType occurrences="1">
-      <code>function () {</code>
+    <MissingClosureReturnType occurrences="2">
+      <code>fn()</code>
     </MissingClosureReturnType>
     <MissingParamType occurrences="4">
       <code>$expected</code>

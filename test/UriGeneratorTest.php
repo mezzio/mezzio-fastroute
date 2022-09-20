@@ -28,8 +28,7 @@ class UriGeneratorTest extends TestCase
     /** @var callable */
     private $dispatchCallback;
 
-    /** @var FastRouteRouter */
-    private $router;
+    private FastRouteRouter $router;
 
     /**
      * Test routes taken from https://github.com/nikic/FastRoute/blob/master/test/RouteParser/StdTest.php
@@ -70,7 +69,7 @@ class UriGeneratorTest extends TestCase
             ['/test/{param:\d+}', ['param' => 1], '/test/1'],
             //['/test/{param:\d+}', ['param' => 'foo'], 'exception', null],
             ['/test/{ param : \d{1,9} }', ['param' => 1], '/test/1'],
-            ['/test/{ param : \d{1,9} }', ['param' => 123456789], '/test/123456789'],
+            ['/test/{ param : \d{1,9} }', ['param' => 123_456_789], '/test/123456789'],
             ['/test/{ param : \d{1,9} }', ['param' => 0], '/test/0'],
             ['/test[opt]', [], '/testopt'],
             ['/test[/{param}]', [], '/test'],
@@ -106,7 +105,7 @@ class UriGeneratorTest extends TestCase
             ],
             [
                 '/test/{ param : \d{1,9} }',
-                ['param' => 1234567890],
+                ['param' => 1_234_567_890],
                 RuntimeException::class,
                 'Parameter value for [param] did not match the regex `\d{1,9}`',
             ],
@@ -123,9 +122,7 @@ class UriGeneratorTest extends TestCase
     {
         $this->fastRouter       = $this->prophesize(RouteCollector::class);
         $this->dispatcher       = $this->prophesize(Dispatcher::class);
-        $this->dispatchCallback = function () {
-            return $this->dispatcher->reveal();
-        };
+        $this->dispatchCallback = fn() => $this->dispatcher->reveal();
 
         $this->router = new FastRouteRouter(
             $this->fastRouter->reveal(),
