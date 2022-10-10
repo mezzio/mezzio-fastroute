@@ -32,11 +32,9 @@ class FastRouteRouterTest extends TestCase
 {
     use ProphecyTrait;
 
-    /** @var RouteCollector|ProphecyInterface */
-    private $fastRouter;
+    private RouteCollector|ProphecyInterface $fastRouter;
 
-    /** @var Dispatcher|ProphecyInterface */
-    private $dispatcher;
+    private Dispatcher|ProphecyInterface $dispatcher;
 
     /** @var callable */
     private $dispatchCallback;
@@ -45,9 +43,7 @@ class FastRouteRouterTest extends TestCase
     {
         $this->fastRouter       = $this->prophesize(RouteCollector::class);
         $this->dispatcher       = $this->prophesize(Dispatcher::class);
-        $this->dispatchCallback = function () {
-            return $this->dispatcher->reveal();
-        };
+        $this->dispatchCallback = fn() => $this->dispatcher->reveal();
     }
 
     private function getRouter(): FastRouteRouter
@@ -66,9 +62,7 @@ class FastRouteRouterTest extends TestCase
     public function testWillLazyInstantiateAFastRouteCollectorIfNoneIsProvidedToConstructor(): void
     {
         $router         = new FastRouteRouter();
-        $routeCollector = Closure::bind(function () {
-            return $this->router;
-        }, $router, FastRouteRouter::class)();
+        $routeCollector = Closure::bind(fn() => $this->router, $router, FastRouteRouter::class)();
 
         $this->assertInstanceOf(RouteCollector::class, $routeCollector);
     }
@@ -79,9 +73,7 @@ class FastRouteRouterTest extends TestCase
         $router = $this->getRouter();
         $router->addRoute($route);
 
-        $routesToInject = Closure::bind(function () {
-            return $this->routesToInject;
-        }, $router, FastRouteRouter::class)();
+        $routesToInject = Closure::bind(fn() => $this->routesToInject, $router, FastRouteRouter::class)();
         $this->assertContains($route, $routesToInject);
     }
 
@@ -104,9 +96,7 @@ class FastRouteRouterTest extends TestCase
         $uri->getPath()->willReturn('/foo');
 
         $request = $this->prophesize(ServerRequestInterface::class);
-        $request->getUri()->will(function () use ($uri) {
-            return $uri->reveal();
-        });
+        $request->getUri()->will(static fn(): object => $uri->reveal());
         $request->getMethod()->willReturn(RequestMethod::METHOD_GET);
 
         $router->match($request->reveal());
@@ -183,7 +173,6 @@ class FastRouteRouterTest extends TestCase
 
     /**
      * @depends testMatchingRouteShouldReturnSuccessfulRouteResult
-     * @param array $data
      */
     public function testMatchedRouteResultContainsRoute(array $data): void
     {
@@ -437,9 +426,7 @@ class FastRouteRouterTest extends TestCase
      * @group zendframework/zend-expressive#53
      * @group 8
      * @dataProvider generatedUriProvider
-     * @param array $routes
      * @param string $expected
-     * @param array $generateArgs
      */
     public function testCanGenerateUriFromRoutes(array $routes, $expected, array $generateArgs): void
     {
@@ -636,9 +623,7 @@ class FastRouteRouterTest extends TestCase
         $uri->getPath()->willReturn($path);
 
         $request = $this->prophesize(ServerRequestInterface::class);
-        $request->getUri()->will(function () use ($uri) {
-            return $uri->reveal();
-        });
+        $request->getUri()->will(static fn(): object => $uri->reveal());
 
         $request->getMethod()->willReturn($method);
 

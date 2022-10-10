@@ -74,56 +74,46 @@ class FastRouteRouter implements RouterInterface
 
     /**
      * Cache generated route data?
-     *
-     * @var bool
      */
-    private $cacheEnabled = false;
+    private bool $cacheEnabled = false;
 
     /**
      * Cache file path relative to the project directory.
-     *
-     * @var string
      */
-    private $cacheFile = 'data/cache/fastroute.php.cache';
+    private string $cacheFile = 'data/cache/fastroute.php.cache';
 
     /** @var callable A factory callback that can return a dispatcher. */
     private $dispatcherCallback;
 
     /**
      * Cached data used by the dispatcher.
-     *
-     * @var array
      */
-    private $dispatchData = [];
+    private array $dispatchData = [];
 
     /**
      * True if cache is enabled and valid dispatch data has been loaded from
      * cache.
-     *
-     * @var bool
      */
-    private $hasCache = false;
+    private bool $hasCache = false;
 
     /**
      * FastRoute router
-     *
-     * @var RouteCollector
      */
-    private $router;
+    private RouteCollector $router;
 
     /**
      * All attached routes as Route instances
      *
      * @var Route[]
      */
-    private $routes = [];
+    private array $routes = [];
 
     /**
      * Routes to inject into the underlying RouteCollector.
      *
      * @var Route[]
      */
-    private $routesToInject = [];
+    private array $routesToInject = [];
 
     /**
      * Constructor
@@ -361,9 +351,7 @@ class FastRouteRouter implements RouterInterface
      */
     private function createDispatcherCallback(): callable
     {
-        return function ($data) {
-            return new GroupCountBased($data);
-        };
+        return static fn($data): GroupCountBased => new GroupCountBased($data);
     }
 
     /**
@@ -387,7 +375,7 @@ class FastRouteRouter implements RouterInterface
     private function marshalMatchedRoute(array $result, string $method): RouteResult
     {
         $path  = $result[1];
-        $route = array_reduce($this->routes, function ($matched, $route) use ($path, $method) {
+        $route = array_reduce($this->routes, static function ($matched, $route) use ($path, $method) {
             if ($matched) {
                 return $matched;
             }
@@ -479,7 +467,7 @@ class FastRouteRouter implements RouterInterface
      */
     private function loadDispatchData(): void
     {
-        set_error_handler(function () {
+        set_error_handler(static function (): void {
         }, E_WARNING); // suppress php warnings
         $dispatchData = include $this->cacheFile;
         restore_error_handler();
@@ -545,7 +533,7 @@ class FastRouteRouter implements RouterInterface
     private function marshalMethodNotAllowedResult(array $result): RouteResult
     {
         $path           = $result[1];
-        $allowedMethods = array_reduce($this->routes, function ($allowedMethods, $route) use ($path) {
+        $allowedMethods = array_reduce($this->routes, static function ($allowedMethods, $route) use ($path) {
             if ($path !== $route->getPath()) {
                 return $allowedMethods;
             }
