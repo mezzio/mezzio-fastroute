@@ -7,60 +7,65 @@ namespace MezzioTest\Router;
 use Closure;
 use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\FastRouteRouterFactory;
+use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ObjectProphecy;
 use Psr\Container\ContainerInterface;
 
 class FastRouteRouterFactoryTest extends TestCase
 {
-    use ProphecyTrait;
-
     private FastRouteRouterFactory $factory;
 
-    /** @var ObjectProphecy<ContainerInterface> */
-    private ObjectProphecy $container;
+    /** @var ContainerInterface&MockObject */
+    private ContainerInterface $container;
 
     protected function setUp(): void
     {
         $this->factory   = new FastRouteRouterFactory();
-        $this->container = $this->prophesize(ContainerInterface::class);
+        $this->container = $this->createMock(ContainerInterface::class);
     }
 
     public function testCreatesRouterWithEmptyConfig()
     {
-        $this->container->has('config')->willReturn(false);
+        $this->container->expects(self::once())
+            ->method('has')
+            ->with('config')
+            ->willReturn(false);
 
-        $router = ($this->factory)($this->container->reveal());
+        $router = ($this->factory)($this->container);
 
-        $this->assertInstanceOf(FastRouteRouter::class, $router);
+        self::assertInstanceOf(FastRouteRouter::class, $router);
         $cacheEnabled = Closure::bind(fn() => $this->cacheEnabled, $router, FastRouteRouter::class)();
-        $this->assertFalse($cacheEnabled);
+        self::assertFalse($cacheEnabled);
 
         $cacheFile = Closure::bind(fn() => $this->cacheFile, $router, FastRouteRouter::class)();
-        $this->assertSame('data/cache/fastroute.php.cache', $cacheFile);
+        self::assertSame('data/cache/fastroute.php.cache', $cacheFile);
     }
 
     public function testCreatesRouterWithConfig()
     {
-        $this->container->has('config')->willReturn(true);
-        $this->container->get('config')->willReturn([
-            'router' => [
-                'fastroute' => [
-                    FastRouteRouter::CONFIG_CACHE_ENABLED => true,
-                    FastRouteRouter::CONFIG_CACHE_FILE    => '/foo/bar/file-cache',
+        $this->container->expects(self::once())
+            ->method('has')
+            ->with('config')
+            ->willReturn(true);
+        $this->container->expects(self::once())
+            ->method('get')
+            ->with('config')->willReturn([
+                'router' => [
+                    'fastroute' => [
+                        FastRouteRouter::CONFIG_CACHE_ENABLED => true,
+                        FastRouteRouter::CONFIG_CACHE_FILE    => '/foo/bar/file-cache',
+                    ],
                 ],
-            ],
-        ]);
+            ]);
 
-        $router = ($this->factory)($this->container->reveal());
+        $router = ($this->factory)($this->container);
 
-        $this->assertInstanceOf(FastRouteRouter::class, $router);
+        self::assertInstanceOf(FastRouteRouter::class, $router);
 
         $cacheEnabled = Closure::bind(fn() => $this->cacheEnabled, $router, FastRouteRouter::class)();
-        $this->assertTrue($cacheEnabled);
+        self::assertTrue($cacheEnabled);
 
         $cacheFile = Closure::bind(fn() => $this->cacheFile, $router, FastRouteRouter::class)();
-        $this->assertSame('/foo/bar/file-cache', $cacheFile);
+        self::assertSame('/foo/bar/file-cache', $cacheFile);
     }
 }

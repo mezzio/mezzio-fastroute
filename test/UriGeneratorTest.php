@@ -10,24 +10,11 @@ use Mezzio\Router\Exception\RuntimeException;
 use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\Route;
 use PHPUnit\Framework\TestCase;
-use Prophecy\PhpUnit\ProphecyTrait;
-use Prophecy\Prophecy\ProphecyInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Throwable;
 
 class UriGeneratorTest extends TestCase
 {
-    use ProphecyTrait;
-
-    /** @var RouteCollector|ProphecyInterface */
-    private $fastRouter;
-
-    /** @var Dispatcher|ProphecyInterface */
-    private $dispatcher;
-
-    /** @var callable */
-    private $dispatchCallback;
-
     private FastRouteRouter $router;
 
     /**
@@ -120,19 +107,18 @@ class UriGeneratorTest extends TestCase
 
     protected function setUp(): void
     {
-        $this->fastRouter       = $this->prophesize(RouteCollector::class);
-        $this->dispatcher       = $this->prophesize(Dispatcher::class);
-        $this->dispatchCallback = fn() => $this->dispatcher->reveal();
+        $fastRouter       = $this->createMock(RouteCollector::class);
+        $dispatchCallback = fn() => $this->createMock(Dispatcher::class);
 
         $this->router = new FastRouteRouter(
-            $this->fastRouter->reveal(),
-            $this->dispatchCallback
+            $fastRouter,
+            $dispatchCallback
         );
     }
 
     private function getMiddleware(): MiddlewareInterface
     {
-        return $this->prophesize(MiddlewareInterface::class)->reveal();
+        return $this->createMock(MiddlewareInterface::class);
     }
 
     /**
@@ -144,11 +130,11 @@ class UriGeneratorTest extends TestCase
         string $expectedUrl
     ): void {
         $this->router->addRoute(new Route($path, $this->getMiddleware(), ['GET'], 'foo'));
-        $this->assertEquals($expectedUrl, $this->router->generateUri('foo', $substitutions));
+        self::assertEquals($expectedUrl, $this->router->generateUri('foo', $substitutions));
 
         // Test with extra parameter
         $substitutions['extra'] = 'parameter';
-        $this->assertEquals($expectedUrl, $this->router->generateUri('foo', $substitutions));
+        self::assertEquals($expectedUrl, $this->router->generateUri('foo', $substitutions));
     }
 
     /**
