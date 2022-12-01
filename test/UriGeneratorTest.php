@@ -108,7 +108,7 @@ class UriGeneratorTest extends TestCase
     protected function setUp(): void
     {
         $fastRouter       = $this->createMock(RouteCollector::class);
-        $dispatchCallback = fn() => $this->createMock(Dispatcher::class);
+        $dispatchCallback = fn(): Dispatcher => $this->createMock(Dispatcher::class);
 
         $this->router = new FastRouteRouter(
             $fastRouter,

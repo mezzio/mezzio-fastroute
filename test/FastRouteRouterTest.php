@@ -27,6 +27,7 @@ use function file_get_contents;
 use function is_file;
 use function unlink;
 
+/** @psalm-import-type FastRouteConfig from FastRouteRouter */
 class FastRouteRouterTest extends TestCase
 {
     /** @var RouteCollector&MockObject */
@@ -40,7 +41,7 @@ class FastRouteRouterTest extends TestCase
     {
         $this->fastRouter       = $this->createMock(RouteCollector::class);
         $this->dispatcher       = $this->createMock(Dispatcher::class);
-        $this->dispatchCallback = fn() => $this->dispatcher;
+        $this->dispatchCallback = fn(): Dispatcher => $this->dispatcher;
     }
 
     private function getRouter(): FastRouteRouter
@@ -174,7 +175,9 @@ class FastRouteRouterTest extends TestCase
         self::assertInstanceOf(RouteResult::class, $result);
         self::assertTrue($result->isSuccess());
         self::assertSame('/foo^GET', $result->getMatchedRouteName());
-        self::assertSame($middleware, $result->getMatchedRoute()->getMiddleware());
+        $matchedRoute = $result->getMatchedRoute();
+        self::assertInstanceOf(Route::class, $matchedRoute);
+        self::assertSame($middleware, $matchedRoute->getMiddleware());
         self::assertSame(['bar' => 'baz'], $result->getMatchedParams());
 
         return ['route' => $route, 'result' => $result];
@@ -182,7 +185,7 @@ class FastRouteRouterTest extends TestCase
 
     /**
      * @depends testMatchingRouteShouldReturnSuccessfulRouteResult
-     * @param array $data
+     * @param array{route: Route, result: RouteResult} $data
      */
     public function testMatchedRouteResultContainsRoute(array $data): void
     {
@@ -214,7 +217,7 @@ class FastRouteRouterTest extends TestCase
      * @param string $requestPath
      * @param string $expectedId
      */
-    public function testMatchWithUrlEncodedSpecialChars($routePath, $requestPath, $expectedId): void
+    public function testMatchWithUrlEncodedSpecialChars(string $routePath, string $requestPath, string $expectedId): void
     {
         $request = $this->createServerRequest($requestPath, RequestMethod::METHOD_GET);
 
@@ -380,7 +383,7 @@ class FastRouteRouterTest extends TestCase
     }
 
     /**
-     * @return iterable<string, array{ 0:list<Route>, 1:string, 2:mixed[]}>
+     * @return iterable<string, array{ 0:list<Route>, 1:string, 2:array{0: string, 1?:array}}>
      */
     public function generatedUriProvider(): iterable
     {
@@ -422,7 +425,7 @@ class FastRouteRouterTest extends TestCase
      * @group 8
      * @dataProvider generatedUriProvider
      * @param list<Route> $routes
-     * @param array $generateArgs
+     * @param array{0:string, 1?:array} $generateArgs
      */
     public function testCanGenerateUriFromRoutes(array $routes, string $expected, array $generateArgs): void
     {
@@ -431,7 +434,7 @@ class FastRouteRouterTest extends TestCase
             $router->addRoute($route);
         }
 
-        $uri = $router->generateUri(...$generateArgs);
+        $uri = $router->generateUri($generateArgs[0], $generateArgs[1] ?? []);
         self::assertEquals($expected, $uri);
     }
 
@@ -462,6 +465,25 @@ class FastRouteRouterTest extends TestCase
             ],
         ]);
         self::assertEquals('/page/5/de/optional-sort', $uri);
+    }
+
+    public function testThatNonArrayDefaultsAreIgnored(): void
+    {
+        $route = new Route(
+            '/page[/{page:\d+}/{locale:[a-z]{2}}[/optional-{extra:\w+}]]',
+            $this->getMiddleware(),
+            [RequestMethod::METHOD_GET],
+            'limit'
+        );
+        $route->setOptions([
+            'defaults' => 'invalid value for defaults',
+        ]);
+
+        $router = new FastRouteRouter();
+        $router->addRoute($route);
+
+        $uri = $router->generateUri('limit', ['page' => 1, 'locale' => 'en']);
+        self::assertEquals('/page/1/en', $uri);
     }
 
     public function testReturnedRouteResultShouldContainRouteName(): void
@@ -607,6 +629,7 @@ class FastRouteRouterTest extends TestCase
         self::assertEquals($expectedUri, $router->generateUri('foo', $params));
     }
 
+    /** @psalm-param FastRouteConfig $config */
     public function createCachingRouter(array $config, Route $route): FastRouteRouter
     {
         $router = new FastRouteRouter(null, null, $config);
@@ -662,7 +685,9 @@ class FastRouteRouterTest extends TestCase
         self::assertInstanceOf(RouteResult::class, $result);
         self::assertTrue($result->isSuccess());
         self::assertSame('foo', $result->getMatchedRouteName());
-        self::assertSame($middleware, $result->getMatchedRoute()->getMiddleware());
+        $matchedRoute = $result->getMatchedRoute();
+        self::assertInstanceOf(Route::class, $matchedRoute);
+        self::assertSame($middleware, $matchedRoute->getMiddleware());
 
         unlink($cacheFile);
     }

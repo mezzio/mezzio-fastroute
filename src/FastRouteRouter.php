@@ -38,6 +38,12 @@ use const E_WARNING;
 
 /**
  * Router implementation bridging nikic/fast-route.
+ *
+ * @psalm-type FastRouteConfig = array{
+ *     cache_enabled?: bool,
+ *     cache_file?: string,
+ *     ...
+ * }
  */
 class FastRouteRouter implements RouterInterface
 {
@@ -83,7 +89,7 @@ class FastRouteRouter implements RouterInterface
      */
     private string $cacheFile = 'data/cache/fastroute.php.cache';
 
-    /** @var callable A factory callback that can return a dispatcher. */
+    /** @var callable(array|object): Dispatcher|null A factory callback that can return a dispatcher. */
     private $dispatcherCallback;
 
     /**
@@ -130,9 +136,10 @@ class FastRouteRouter implements RouterInterface
      *
      * @param null|RouteCollector $router If not provided, a default
      *     implementation will be used.
-     * @param null|callable $dispatcherFactory Callable that will return a
+     * @param null|callable(array|object): Dispatcher $dispatcherFactory Callable that will return a
      *     FastRoute dispatcher.
-     * @param array $config Array of custom configuration options.
+     * @param array<string, mixed> $config Array of custom configuration options.
+     * @psalm-param FastRouteConfig $config
      */
     public function __construct(
         ?RouteCollector $router = null,
@@ -234,8 +241,11 @@ class FastRouteRouter implements RouterInterface
         $route   = $this->routes[$name];
         $options = ArrayUtils::merge($route->getOptions(), $options);
 
-        if (! empty($options['defaults'])) {
-            $substitutions = array_merge($options['defaults'], $substitutions);
+        /** @psalm-var mixed $defaults */
+        $defaults = $options['defaults'] ?? [];
+
+        if (is_array($defaults) && $defaults !== []) {
+            $substitutions = array_merge($defaults, $substitutions);
         }
 
         $routeParser       = new RouteParser();
@@ -349,6 +359,8 @@ class FastRouteRouter implements RouterInterface
 
     /**
      * Return a default implementation of a callback that can return a Dispatcher.
+     *
+     * @return callable(array|object): GroupCountBased
      */
     private function createDispatcherCallback(): callable
     {
