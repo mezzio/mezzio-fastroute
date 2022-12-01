@@ -212,13 +212,12 @@ class FastRouteRouterTest extends TestCase
      * @see https://github.com/zendframework/zend-expressive-fastroute/pull/59
      *
      * @dataProvider matchWithUrlEncodedSpecialCharsDataProvider
-     *
-     * @param string $routePath
-     * @param string $requestPath
-     * @param string $expectedId
      */
-    public function testMatchWithUrlEncodedSpecialChars(string $routePath, string $requestPath, string $expectedId): void
-    {
+    public function testMatchWithUrlEncodedSpecialChars(
+        string $routePath,
+        string $requestPath,
+        string $expectedId
+    ): void {
         $request = $this->createServerRequest($requestPath, RequestMethod::METHOD_GET);
 
         $route = new Route($routePath, $this->getMiddleware(), [RequestMethod::METHOD_GET], 'foo');
