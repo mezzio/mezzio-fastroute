@@ -33,8 +33,8 @@ class ConfigProvider
                 RouterInterface::class => FastRouteRouter::class,
 
                 // Legacy Zend Framework aliases
-                \Zend\Expressive\Router\RouterInterface::class                 => RouterInterface::class,
-                \Zend\Expressive\Router\FastRouteRouter\FastRouteRouter::class => FastRouteRouter::class,
+                'Zend\Expressive\Router\RouterInterface'                 => RouterInterface::class,
+                'Zend\Expressive\Router\FastRouteRouter\FastRouteRouter' => FastRouteRouter::class,
             ],
             'factories' => [
                 FastRouteRouter::class => FastRouteRouterFactory::class,

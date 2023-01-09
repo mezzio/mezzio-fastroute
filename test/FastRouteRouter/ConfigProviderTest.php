@@ -21,7 +21,8 @@ class ConfigProviderTest extends TestCase
     public function testInvocationReturnsArray(): array
     {
         $config = ($this->provider)();
-        $this->assertIsArray($config);
+        /** @psalm-suppress RedundantCondition */
+        self::assertIsArray($config);
 
         return $config;
     }
@@ -31,15 +32,15 @@ class ConfigProviderTest extends TestCase
      */
     public function testReturnedArrayContainsDependencies(array $config): void
     {
-        $this->assertArrayHasKey('dependencies', $config);
-        $this->assertIsArray($config['dependencies']);
+        self::assertArrayHasKey('dependencies', $config);
+        self::assertIsArray($config['dependencies']);
 
-        $this->assertArrayHasKey('aliases', $config['dependencies']);
-        $this->assertIsArray($config['dependencies']['aliases']);
-        $this->assertArrayHasKey(RouterInterface::class, $config['dependencies']['aliases']);
+        self::assertArrayHasKey('aliases', $config['dependencies']);
+        self::assertIsArray($config['dependencies']['aliases']);
+        self::assertArrayHasKey(RouterInterface::class, $config['dependencies']['aliases']);
 
-        $this->assertArrayHasKey('factories', $config['dependencies']);
-        $this->assertIsArray($config['dependencies']['factories']);
-        $this->assertArrayHasKey(FastRouteRouter::class, $config['dependencies']['factories']);
+        self::assertArrayHasKey('factories', $config['dependencies']);
+        self::assertIsArray($config['dependencies']['factories']);
+        self::assertArrayHasKey(FastRouteRouter::class, $config['dependencies']['factories']);
     }
 }

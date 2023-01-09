@@ -24,7 +24,7 @@ class FastRouteRouterFactoryTest extends TestCase
         $this->container = $this->createMock(ContainerInterface::class);
     }
 
-    public function testCreatesRouterWithEmptyConfig()
+    public function testCreatesRouterWithEmptyConfig(): void
     {
         $this->container->expects(self::once())
             ->method('has')
@@ -41,7 +41,7 @@ class FastRouteRouterFactoryTest extends TestCase
         self::assertSame('data/cache/fastroute.php.cache', $cacheFile);
     }
 
-    public function testCreatesRouterWithConfig()
+    public function testCreatesRouterWithConfig(): void
     {
         $this->container->expects(self::once())
             ->method('has')
