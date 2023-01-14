@@ -18,6 +18,7 @@ use function array_merge;
 use function array_reduce;
 use function array_reverse;
 use function array_unique;
+use function array_values;
 use function assert;
 use function dirname;
 use function file_exists;
@@ -44,6 +45,19 @@ use const E_WARNING;
  *     cache_file?: string,
  *     ...
  * }
+ * @psalm-type FastRouteNotFoundResult = array{
+ *     0: Dispatcher::NOT_FOUND,
+ * }
+ * @psalm-type FastRouteBadMethodResult = array{
+ *     0: Dispatcher::METHOD_NOT_ALLOWED,
+ *     1: list<non-empty-string>,
+ * }
+ * @psalm-type FastRouteFoundResult = array{
+ *     0: Dispatcher::FOUND,
+ *     1: non-empty-string,
+ *     2: list<string, mixed>
+ * }
+ * @psalm-type FastRouteResult = FastRouteNotFoundResult|FastRouteBadMethodResult|FastRouteFoundResult
  */
 class FastRouteRouter implements RouterInterface
 {
@@ -111,14 +125,14 @@ class FastRouteRouter implements RouterInterface
     /**
      * All attached routes as Route instances
      *
-     * @var Route[]
+     * @var array<non-empty-string, Route>
      */
     private array $routes = [];
 
     /**
      * Routes to inject into the underlying RouteCollector.
      *
-     * @var Route[]
+     * @var list<Route>
      */
     private array $routesToInject = [];
 
@@ -204,9 +218,14 @@ class FastRouteRouter implements RouterInterface
         $dispatcher = $this->getDispatcher($dispatchData);
         $result     = $dispatcher->dispatch($method, $path);
 
-        return $result[0] !== Dispatcher::FOUND
-            ? $this->marshalFailedRoute($result)
-            : $this->marshalMatchedRoute($result, $method);
+        if ($result[0] !== Dispatcher::FOUND) {
+            /** @psalm-var FastRouteNotFoundResult|FastRouteBadMethodResult $result */
+
+            return $this->marshalFailedRoute($result);
+        }
+
+        /** @psalm-var FastRouteFoundResult $result */
+        return $this->marshalMatchedRoute($result, $method);
     }
 
     /**
@@ -372,6 +391,8 @@ class FastRouteRouter implements RouterInterface
      *
      * If the failure was due to the HTTP method, passes the allowed HTTP
      * methods to the factory.
+     *
+     * @param FastRouteNotFoundResult|FastRouteBadMethodResult $result
      */
     private function marshalFailedRoute(array $result): RouteResult
     {
@@ -384,25 +405,31 @@ class FastRouteRouter implements RouterInterface
 
     /**
      * Marshals a route result based on the results of matching and the current HTTP method.
+     *
+     * @param FastRouteFoundResult $result
      */
     private function marshalMatchedRoute(array $result, string $method): RouteResult
     {
         $path  = $result[1];
-        $route = array_reduce($this->routes, static function ($matched, $route) use ($path, $method) {
-            if ($matched) {
-                return $matched;
-            }
+        $route = array_reduce(
+            $this->routes,
+            static function (Route|false $matched, Route $route) use ($path, $method): Route|false {
+                if ($matched) {
+                    return $matched;
+                }
 
-            if ($path !== $route->getPath()) {
-                return $matched;
-            }
+                if ($path !== $route->getPath()) {
+                    return $matched;
+                }
 
-            if (! $route->allowsMethod($method)) {
-                return $matched;
-            }
+                if (! $route->allowsMethod($method)) {
+                    return $matched;
+                }
 
-            return $route;
-        }, false);
+                return $route;
+            },
+            false
+        );
 
         if (false === $route) {
             return $this->marshalMethodNotAllowedResult($result);
@@ -411,7 +438,7 @@ class FastRouteRouter implements RouterInterface
         $params = $result[2];
 
         $options = $route->getOptions();
-        if (! empty($options['defaults'])) {
+        if (isset($options['defaults']) && is_array($options['defaults'])) {
             $params = array_merge($options['defaults'], $params);
         }
 
@@ -547,18 +574,27 @@ class FastRouteRouter implements RouterInterface
         );
     }
 
+    /** @param FastRouteFoundResult $result */
     private function marshalMethodNotAllowedResult(array $result): RouteResult
     {
         $path           = $result[1];
-        $allowedMethods = array_reduce($this->routes, static function ($allowedMethods, $route) use ($path) {
-            if ($path !== $route->getPath()) {
-                return $allowedMethods;
-            }
+        $allowedMethods = array_reduce(
+            $this->routes,
+            /**
+             * @param list<string> $allowedMethods
+             * @return list<string>
+             */
+            static function (array $allowedMethods, Route $route) use ($path): array {
+                if ($path !== $route->getPath()) {
+                    return $allowedMethods;
+                }
 
-            return array_merge($allowedMethods, $route->getAllowedMethods());
-        }, []);
+                return array_merge($allowedMethods, (array) $route->getAllowedMethods());
+            },
+            []
+        );
 
-        $allowedMethods = array_unique($allowedMethods);
+        $allowedMethods = array_values(array_unique($allowedMethods));
 
         return RouteResult::fromRouteFailure($allowedMethods);
     }

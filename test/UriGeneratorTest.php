@@ -75,7 +75,7 @@ class UriGeneratorTest extends TestCase
 
     /**
      * @psalm-return iterable<int, array{
-     *     0:string,
+     *     0:non-empty-string,
      *     1:array<string, mixed>,
      *     2:class-string<Throwable>,
      *     3:string
@@ -138,6 +138,7 @@ class UriGeneratorTest extends TestCase
     }
 
     /**
+     * @param non-empty-string $path
      * @param class-string<Throwable> $expectedException
      * @dataProvider exceptionalRoutes
      */
