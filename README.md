@@ -1,6 +1,7 @@
 # FastRoute integration for Mezzio
 
 [![Build Status](https://github.com/mezzio/mezzio-fastroute/workflows/Continuous%20Integration/badge.svg)](https://github.com/mezzio/mezzio-fastroute/actions?query=workflow%3A"Continuous+Integration")
+[![Type Coverage](https://shepherd.dev/github/mezzio/mezzio-fastroute/coverage.svg)](https://shepherd.dev/github/mezzio/mezzio-fastroute)
 
 > ## 🇷🇺 Русским гражданам
 >

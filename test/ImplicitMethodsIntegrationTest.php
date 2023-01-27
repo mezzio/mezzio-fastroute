@@ -20,7 +20,12 @@ class ImplicitMethodsIntegrationTest extends RouterIntegrationTest
     }
 
     /**
-     * @return Generator<string, array{0: string, 1: array<string, mixed>, 2: string, 3: array<string, mixed>}>
+     * @return Generator<string, array{
+     *     0: non-empty-string,
+     *     1: array<string, mixed>,
+     *     2: string,
+     *     3: array<string, mixed>
+     * }>
      */
     public function implicitRoutesAndRequests(): Generator
     {

@@ -195,7 +195,7 @@ class FastRouteRouterTest extends TestCase
     }
 
     /**
-     * @return iterable<string, string[]>
+     * @return iterable<string, array{0: non-empty-string, 1: string, 2: string}>
      */
     public function matchWithUrlEncodedSpecialCharsDataProvider(): iterable
     {
@@ -211,6 +211,7 @@ class FastRouteRouterTest extends TestCase
     /**
      * @see https://github.com/zendframework/zend-expressive-fastroute/pull/59
      *
+     * @param non-empty-string $routePath
      * @dataProvider matchWithUrlEncodedSpecialCharsDataProvider
      */
     public function testMatchWithUrlEncodedSpecialChars(

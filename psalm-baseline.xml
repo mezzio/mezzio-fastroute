@@ -1,27 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.0.0@4e177bf0c9f03c17d2fbfd83b7cc9c47605274d8">
+<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
+  <file src="src/Exception/InvalidCacheDirectoryException.php">
+    <InvalidExtendClass occurrences="1">
+      <code>RuntimeException</code>
+    </InvalidExtendClass>
+  </file>
+  <file src="src/Exception/InvalidCacheException.php">
+    <InvalidExtendClass occurrences="1">
+      <code>RuntimeException</code>
+    </InvalidExtendClass>
+  </file>
   <file src="src/FastRouteRouter.php">
     <InvalidArgument occurrences="1"/>
-    <MissingClosureReturnType occurrences="1">
-      <code>static function ($matched, $route) use ($path, $method) {</code>
-    </MissingClosureReturnType>
-    <MixedArgument occurrences="10">
-      <code>$allowedMethods</code>
-      <code>$allowedMethods</code>
-      <code>$options['defaults']</code>
-      <code>$params</code>
-      <code>$params</code>
+    <MixedArgument occurrences="2">
       <code>$part[0]</code>
       <code>$part[1]</code>
-      <code>$result[1]</code>
-      <code>$route</code>
-      <code>$route-&gt;getAllowedMethods()</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="1">
+    <MixedArgumentTypeCoercion occurrences="2">
       <code>$missingParameters</code>
+      <code>$params</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="7">
-      <code>$options['defaults']</code>
+    <MixedArrayAccess occurrences="6">
       <code>$part[0]</code>
       <code>$part[0]</code>
       <code>$part[0]</code>
@@ -34,29 +33,19 @@
       <code>$substitutions[$part[0]]</code>
       <code>$substitutions[$part[0]]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="10">
-      <code>$allowedMethods</code>
+    <MixedAssignment occurrences="4">
       <code>$missingParameters[]</code>
-      <code>$options</code>
       <code>$param</code>
-      <code>$params</code>
       <code>$part</code>
       <code>$part</code>
-      <code>$path</code>
-      <code>$path</code>
-      <code>$route</code>
     </MixedAssignment>
-    <MixedMethodCall occurrences="5">
-      <code>allowsMethod</code>
-      <code>getAllowedMethods</code>
-      <code>getOptions</code>
-      <code>getPath</code>
-      <code>getPath</code>
-    </MixedMethodCall>
     <MixedOperand occurrences="2">
       <code>$part[1]</code>
       <code>$substitutions[$part[0]]</code>
     </MixedOperand>
+    <PossiblyUndefinedArrayOffset occurrences="1">
+      <code>$result[1]</code>
+    </PossiblyUndefinedArrayOffset>
     <RedundantCastGivenDocblockType occurrences="1">
       <code>(array) $this-&gt;router-&gt;getData()</code>
     </RedundantCastGivenDocblockType>
@@ -108,5 +97,10 @@
       <code>$this-&gt;router</code>
       <code>$this-&gt;routesToInject</code>
     </UndefinedThisPropertyFetch>
+  </file>
+  <file src="test/UriGeneratorTest.php">
+    <ArgumentTypeCoercion occurrences="1">
+      <code>$path</code>
+    </ArgumentTypeCoercion>
   </file>
 </files>
