@@ -49,7 +49,7 @@
         "laminas/laminas-diactoros": "^2.24",
         "laminas/laminas-stratigility": "^3.9",
         "mikey179/vfsstream": "^1.6.11",
-        "phpunit/phpunit": "^9.5.27",
+        "phpunit/phpunit": "^10.0.0",
         "psalm/plugin-phpunit": "^0.18.4",
         "vimeo/psalm": "^5.4"
     },
