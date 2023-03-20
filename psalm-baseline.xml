@@ -1,26 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.4.0@62db5d4f6a7ae0a20f7cc5a4952d730272fc0863">
-  <file src="src/Exception/InvalidCacheDirectoryException.php">
-    <InvalidExtendClass occurrences="1">
-      <code>RuntimeException</code>
-    </InvalidExtendClass>
-  </file>
-  <file src="src/Exception/InvalidCacheException.php">
-    <InvalidExtendClass occurrences="1">
-      <code>RuntimeException</code>
-    </InvalidExtendClass>
-  </file>
+<files psalm-version="5.8.0@9cf4f60a333f779ad3bc704a555920e81d4fdcda">
   <file src="src/FastRouteRouter.php">
-    <InvalidArgument occurrences="1"/>
-    <MixedArgument occurrences="2">
+    <InvalidArgument>
+      <code>static function (): void {
+        }</code>
+    </InvalidArgument>
+    <MixedArgument>
       <code>$part[0]</code>
       <code>$part[1]</code>
     </MixedArgument>
-    <MixedArgumentTypeCoercion occurrences="2">
+    <MixedArgumentTypeCoercion>
       <code>$missingParameters</code>
       <code>$params</code>
     </MixedArgumentTypeCoercion>
-    <MixedArrayAccess occurrences="6">
+    <MixedArrayAccess>
       <code>$part[0]</code>
       <code>$part[0]</code>
       <code>$part[0]</code>
@@ -28,79 +21,97 @@
       <code>$part[1]</code>
       <code>$part[1]</code>
     </MixedArrayAccess>
-    <MixedArrayOffset occurrences="3">
+    <MixedArrayOffset>
       <code>$substitutions[$param]</code>
       <code>$substitutions[$part[0]]</code>
       <code>$substitutions[$part[0]]</code>
     </MixedArrayOffset>
-    <MixedAssignment occurrences="4">
+    <MixedAssignment>
       <code>$missingParameters[]</code>
       <code>$param</code>
       <code>$part</code>
       <code>$part</code>
     </MixedAssignment>
-    <MixedOperand occurrences="2">
+    <MixedOperand>
       <code>$part[1]</code>
       <code>$substitutions[$part[0]]</code>
     </MixedOperand>
-    <PossiblyUndefinedArrayOffset occurrences="1">
+    <PossiblyUndefinedArrayOffset>
       <code>$result[1]</code>
     </PossiblyUndefinedArrayOffset>
-    <RedundantCastGivenDocblockType occurrences="1">
-      <code>(array) $this-&gt;router-&gt;getData()</code>
+    <RedundantCastGivenDocblockType>
+      <code><![CDATA[(array) $this->router->getData()]]></code>
     </RedundantCastGivenDocblockType>
-    <UnresolvableInclude occurrences="1">
-      <code>include $this-&gt;cacheFile</code>
+    <UnresolvableInclude>
+      <code><![CDATA[include $this->cacheFile]]></code>
     </UnresolvableInclude>
+    <UnusedReturnValue>
+      <code>int|false</code>
+    </UnusedReturnValue>
   </file>
   <file src="test/ExceptionTest.php">
-    <PossiblyFalseOperand occurrences="1">
-      <code>strrpos(ExceptionInterface::class, '\\')</code>
+    <PossiblyFalseOperand>
+      <code><![CDATA[strrpos(ExceptionInterface::class, '\\')]]></code>
     </PossiblyFalseOperand>
+    <PossiblyUnusedMethod>
+      <code>exceptionProvider</code>
+    </PossiblyUnusedMethod>
   </file>
   <file src="test/FastRouteRouterFactoryTest.php">
-    <MissingClosureReturnType occurrences="4">
-      <code>fn() =&gt; $this-&gt;cacheEnabled</code>
-      <code>fn() =&gt; $this-&gt;cacheEnabled</code>
-      <code>fn() =&gt; $this-&gt;cacheFile</code>
-      <code>fn() =&gt; $this-&gt;cacheFile</code>
+    <MissingClosureReturnType>
+      <code><![CDATA[fn() => $this->cacheEnabled]]></code>
+      <code><![CDATA[fn() => $this->cacheEnabled]]></code>
+      <code><![CDATA[fn() => $this->cacheFile]]></code>
+      <code><![CDATA[fn() => $this->cacheFile]]></code>
     </MissingClosureReturnType>
-    <PossiblyInvalidFunctionCall occurrences="4">
-      <code>Closure::bind(fn() =&gt; $this-&gt;cacheEnabled, $router, FastRouteRouter::class)()</code>
-      <code>Closure::bind(fn() =&gt; $this-&gt;cacheEnabled, $router, FastRouteRouter::class)()</code>
-      <code>Closure::bind(fn() =&gt; $this-&gt;cacheFile, $router, FastRouteRouter::class)()</code>
-      <code>Closure::bind(fn() =&gt; $this-&gt;cacheFile, $router, FastRouteRouter::class)()</code>
-    </PossiblyInvalidFunctionCall>
-    <UndefinedThisPropertyFetch occurrences="4">
-      <code>$this-&gt;cacheEnabled</code>
-      <code>$this-&gt;cacheEnabled</code>
-      <code>$this-&gt;cacheFile</code>
-      <code>$this-&gt;cacheFile</code>
+    <PossiblyNullFunctionCall>
+      <code><![CDATA[Closure::bind(fn() => $this->cacheEnabled, $router, FastRouteRouter::class)()]]></code>
+      <code><![CDATA[Closure::bind(fn() => $this->cacheEnabled, $router, FastRouteRouter::class)()]]></code>
+      <code><![CDATA[Closure::bind(fn() => $this->cacheFile, $router, FastRouteRouter::class)()]]></code>
+      <code><![CDATA[Closure::bind(fn() => $this->cacheFile, $router, FastRouteRouter::class)()]]></code>
+    </PossiblyNullFunctionCall>
+    <UndefinedThisPropertyFetch>
+      <code><![CDATA[$this->cacheEnabled]]></code>
+      <code><![CDATA[$this->cacheEnabled]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
+      <code><![CDATA[$this->cacheFile]]></code>
     </UndefinedThisPropertyFetch>
   </file>
   <file src="test/FastRouteRouterTest.php">
-    <MissingClosureReturnType occurrences="2">
-      <code>fn() =&gt; $this-&gt;router</code>
-      <code>fn() =&gt; $this-&gt;routesToInject</code>
+    <MissingClosureReturnType>
+      <code><![CDATA[fn() => $this->router]]></code>
+      <code><![CDATA[fn() => $this->routesToInject]]></code>
     </MissingClosureReturnType>
-    <MixedArgument occurrences="1">
+    <MixedArgument>
       <code>$routesToInject</code>
     </MixedArgument>
-    <MixedAssignment occurrences="1">
+    <MixedAssignment>
       <code>$routesToInject</code>
     </MixedAssignment>
-    <PossiblyInvalidFunctionCall occurrences="2">
-      <code>Closure::bind(fn() =&gt; $this-&gt;router, $router, FastRouteRouter::class)()</code>
-      <code>Closure::bind(fn() =&gt; $this-&gt;routesToInject, $router, FastRouteRouter::class)()</code>
-    </PossiblyInvalidFunctionCall>
-    <UndefinedThisPropertyFetch occurrences="2">
-      <code>$this-&gt;router</code>
-      <code>$this-&gt;routesToInject</code>
+    <PossiblyNullFunctionCall>
+      <code><![CDATA[Closure::bind(fn() => $this->router, $router, FastRouteRouter::class)()]]></code>
+      <code><![CDATA[Closure::bind(fn() => $this->routesToInject, $router, FastRouteRouter::class)()]]></code>
+    </PossiblyNullFunctionCall>
+    <PossiblyUnusedMethod>
+      <code>generatedUriProvider</code>
+      <code>idemPotentMethods</code>
+      <code>matchWithUrlEncodedSpecialCharsDataProvider</code>
+      <code>uriGeneratorDataProvider</code>
+      <code>uriGeneratorWithPartialDefaultsDataProvider</code>
+    </PossiblyUnusedMethod>
+    <UndefinedThisPropertyFetch>
+      <code><![CDATA[$this->router]]></code>
+      <code><![CDATA[$this->routesToInject]]></code>
     </UndefinedThisPropertyFetch>
   </file>
   <file src="test/UriGeneratorTest.php">
-    <ArgumentTypeCoercion occurrences="1">
+    <ArgumentTypeCoercion>
       <code>$path</code>
     </ArgumentTypeCoercion>
+    <PossiblyUnusedMethod>
+      <code>exceptionalRoutes</code>
+      <code>provideRouteTests</code>
+      <code>provideRoutes</code>
+    </PossiblyUnusedMethod>
   </file>
 </files>

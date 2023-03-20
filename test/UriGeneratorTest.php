@@ -9,6 +9,7 @@ use FastRoute\RouteCollector;
 use Mezzio\Router\Exception\RuntimeException;
 use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\Route;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Psr\Http\Server\MiddlewareInterface;
 use Throwable;
@@ -22,7 +23,7 @@ class UriGeneratorTest extends TestCase
      *
      * @return array<string, string>
      */
-    public function provideRoutes(): array
+    public static function provideRoutes(): array
     {
         return [
             'test_param_regex'       => '/test/{param:\d+}',
@@ -41,7 +42,7 @@ class UriGeneratorTest extends TestCase
     /**
      * @psalm-return array<int, array{0:string, 1:array<string, mixed>, 2:string}>
      */
-    public function provideRouteTests(): array
+    public static function provideRouteTests(): array
     {
         return [
             // path // substitutions[] // expected
@@ -81,7 +82,7 @@ class UriGeneratorTest extends TestCase
      *     3:string
      * }>
      */
-    public function exceptionalRoutes(): iterable
+    public static function exceptionalRoutes(): iterable
     {
         return [
             [
@@ -121,9 +122,7 @@ class UriGeneratorTest extends TestCase
         return $this->createMock(MiddlewareInterface::class);
     }
 
-    /**
-     * @dataProvider provideRouteTests
-     */
+    #[DataProvider('provideRouteTests')]
     public function testRoutes(
         string $path,
         array $substitutions,
@@ -140,8 +139,8 @@ class UriGeneratorTest extends TestCase
     /**
      * @param non-empty-string $path
      * @param class-string<Throwable> $expectedException
-     * @dataProvider exceptionalRoutes
      */
+    #[DataProvider('exceptionalRoutes')]
     public function testExceptionalRoutes(
         string $path,
         array $substitutions,

@@ -27,7 +27,7 @@ class ImplicitMethodsIntegrationTest extends RouterIntegrationTest
      *     3: array<string, mixed>
      * }>
      */
-    public function implicitRoutesAndRequests(): Generator
+    public static function implicitRoutesAndRequests(): Generator
     {
         // @codingStandardsIgnoreStart
         //                  route                     route options, request       params
