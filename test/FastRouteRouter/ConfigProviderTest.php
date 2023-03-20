@@ -7,6 +7,7 @@ namespace MezzioTest\Router\FastRouteRouter;
 use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\FastRouteRouter\ConfigProvider;
 use Mezzio\Router\RouterInterface;
+use PHPUnit\Framework\Attributes\Depends;
 use PHPUnit\Framework\TestCase;
 
 class ConfigProviderTest extends TestCase
@@ -27,9 +28,7 @@ class ConfigProviderTest extends TestCase
         return $config;
     }
 
-    /**
-     * @depends testInvocationReturnsArray
-     */
+    #[Depends('testInvocationReturnsArray')]
     public function testReturnedArrayContainsDependencies(array $config): void
     {
         self::assertArrayHasKey('dependencies', $config);

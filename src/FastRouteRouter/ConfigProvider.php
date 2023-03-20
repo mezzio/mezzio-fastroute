@@ -25,9 +25,6 @@ class ConfigProvider
      */
     public function getDependencies(): array
     {
-        /**
-         * @psalm-suppress UndefinedClass
-         */
         return [
             'aliases'   => [
                 RouterInterface::class => FastRouteRouter::class,

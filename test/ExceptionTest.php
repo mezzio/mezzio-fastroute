@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MezzioTest\Router;
 
 use Mezzio\Router\Exception\ExceptionInterface;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 use function basename;
@@ -18,7 +19,7 @@ class ExceptionTest extends TestCase
     /**
      * @return iterable<string, array<int, string>>
      */
-    public function exceptionProvider(): iterable
+    public static function exceptionProvider(): iterable
     {
         $namespace = substr(ExceptionInterface::class, 0, strrpos(ExceptionInterface::class, '\\') + 1);
 
@@ -30,9 +31,7 @@ class ExceptionTest extends TestCase
         }
     }
 
-    /**
-     * @dataProvider exceptionProvider
-     */
+    #[DataProvider('exceptionProvider')]
     public function testExceptionIsInstanceOfExceptionInterface(string $exception): void
     {
         self::assertStringContainsString('Exception', $exception);
