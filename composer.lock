@@ -123,16 +123,16 @@
         },
         {
             "name": "mezzio/mezzio-router",
-            "version": "3.14.0",
+            "version": "3.15.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-router.git",
-                "reference": "d8fa434e06e3694c06ecef41f50f05f56ddf6084"
+                "reference": "4d95b07441b8a319bf2376713e8dad5480fb6e15"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-router/zipball/d8fa434e06e3694c06ecef41f50f05f56ddf6084",
-                "reference": "d8fa434e06e3694c06ecef41f50f05f56ddf6084",
+                "url": "https://api.github.com/repos/mezzio/mezzio-router/zipball/4d95b07441b8a319bf2376713e8dad5480fb6e15",
+                "reference": "4d95b07441b8a319bf2376713e8dad5480fb6e15",
                 "shasum": ""
             },
             "require": {
@@ -151,10 +151,11 @@
             "require-dev": {
                 "laminas/laminas-coding-standard": "~2.5.0",
                 "laminas/laminas-diactoros": "^2.24",
+                "laminas/laminas-servicemanager": "^3.20.0",
                 "laminas/laminas-stratigility": "^3.9.0",
-                "phpunit/phpunit": "^10.0.12",
+                "phpunit/phpunit": "^10.0.19",
                 "psalm/plugin-phpunit": "^0.18.4",
-                "vimeo/psalm": "^5.7.7"
+                "vimeo/psalm": "^5.8"
             },
             "suggest": {
                 "mezzio/mezzio-aurarouter": "^3.0 to use the Aura.Router routing adapter",
@@ -200,7 +201,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-03-02T11:42:36+00:00"
+            "time": "2023-03-29T08:09:00+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -2470,16 +2471,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.0.18",
+            "version": "10.0.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "582563ed2edc62d1455cdbe00ea49fe09428eef3"
+                "reference": "20c23e85c86e5c06d63538ba464e8054f4744e62"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/582563ed2edc62d1455cdbe00ea49fe09428eef3",
-                "reference": "582563ed2edc62d1455cdbe00ea49fe09428eef3",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/20c23e85c86e5c06d63538ba464e8054f4744e62",
+                "reference": "20c23e85c86e5c06d63538ba464e8054f4744e62",
                 "shasum": ""
             },
             "require": {
@@ -2551,7 +2552,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.18"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.0.19"
             },
             "funding": [
                 {
@@ -2567,7 +2568,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-03-22T06:15:31+00:00"
+            "time": "2023-03-27T11:46:33+00:00"
         },
         {
             "name": "psalm/plugin-phpunit",
@@ -3771,16 +3772,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v6.2.7",
+            "version": "v6.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "cbad09eb8925b6ad4fb721c7a179344dc4a19d45"
+                "reference": "3582d68a64a86ec25240aaa521ec8bc2342b369b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/cbad09eb8925b6ad4fb721c7a179344dc4a19d45",
-                "reference": "cbad09eb8925b6ad4fb721c7a179344dc4a19d45",
+                "url": "https://api.github.com/repos/symfony/console/zipball/3582d68a64a86ec25240aaa521ec8bc2342b369b",
+                "reference": "3582d68a64a86ec25240aaa521ec8bc2342b369b",
                 "shasum": ""
             },
             "require": {
@@ -3842,12 +3843,12 @@
             "homepage": "https://symfony.com",
             "keywords": [
                 "cli",
-                "command line",
+                "command-line",
                 "console",
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v6.2.7"
+                "source": "https://github.com/symfony/console/tree/v6.2.8"
             },
             "funding": [
                 {
@@ -3863,7 +3864,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-25T17:00:03+00:00"
+            "time": "2023-03-29T21:42:15+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -4412,16 +4413,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v6.2.7",
+            "version": "v6.2.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "67b8c1eec78296b85dc1c7d9743830160218993d"
+                "reference": "193e83bbd6617d6b2151c37fff10fa7168ebddef"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/67b8c1eec78296b85dc1c7d9743830160218993d",
-                "reference": "67b8c1eec78296b85dc1c7d9743830160218993d",
+                "url": "https://api.github.com/repos/symfony/string/zipball/193e83bbd6617d6b2151c37fff10fa7168ebddef",
+                "reference": "193e83bbd6617d6b2151c37fff10fa7168ebddef",
                 "shasum": ""
             },
             "require": {
@@ -4478,7 +4479,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v6.2.7"
+                "source": "https://github.com/symfony/string/tree/v6.2.8"
             },
             "funding": [
                 {
@@ -4494,7 +4495,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-02-24T10:42:00+00:00"
+            "time": "2023-03-20T16:06:02+00:00"
         },
         {
             "name": "theseer/tokenizer",
@@ -4548,16 +4549,16 @@
         },
         {
             "name": "vimeo/psalm",
-            "version": "5.8.0",
+            "version": "5.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/vimeo/psalm.git",
-                "reference": "9cf4f60a333f779ad3bc704a555920e81d4fdcda"
+                "reference": "8b9ad1eb9e8b7d3101f949291da2b9f7767cd163"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/vimeo/psalm/zipball/9cf4f60a333f779ad3bc704a555920e81d4fdcda",
-                "reference": "9cf4f60a333f779ad3bc704a555920e81d4fdcda",
+                "url": "https://api.github.com/repos/vimeo/psalm/zipball/8b9ad1eb9e8b7d3101f949291da2b9f7767cd163",
+                "reference": "8b9ad1eb9e8b7d3101f949291da2b9f7767cd163",
                 "shasum": ""
             },
             "require": {
@@ -4589,6 +4590,7 @@
                 "psalm/psalm": "self.version"
             },
             "require-dev": {
+                "amphp/phpunit-util": "^2.0",
                 "bamarni/composer-bin-plugin": "^1.4",
                 "brianium/paratest": "^6.9",
                 "ext-curl": "*",
@@ -4647,9 +4649,9 @@
             ],
             "support": {
                 "issues": "https://github.com/vimeo/psalm/issues",
-                "source": "https://github.com/vimeo/psalm/tree/5.8.0"
+                "source": "https://github.com/vimeo/psalm/tree/5.9.0"
             },
-            "time": "2023-03-09T04:14:35+00:00"
+            "time": "2023-03-29T21:38:21+00:00"
         },
         {
             "name": "webimpress/coding-standard",
