@@ -11,11 +11,11 @@
          displayDetailsOnTestsThatTriggerDeprecations="true"
          displayDetailsOnTestsThatTriggerErrors="true"
 >
-    <coverage>
+    <source>
         <include>
             <directory suffix=".php">src</directory>
         </include>
-    </coverage>
+    </source>
     <testsuites>
         <testsuite name="Mezzio FastRoute Tests">
             <directory>./test</directory>
