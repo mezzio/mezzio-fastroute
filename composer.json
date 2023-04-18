@@ -46,12 +46,12 @@
     },
     "require-dev": {
         "laminas/laminas-coding-standard": "~2.5.0",
-        "laminas/laminas-diactoros": "^2.24",
+        "laminas/laminas-diactoros": "^2.25.2",
         "laminas/laminas-stratigility": "^3.9",
         "mikey179/vfsstream": "^1.6.11",
-        "phpunit/phpunit": "^10.0.17",
+        "phpunit/phpunit": "^10.1.1",
         "psalm/plugin-phpunit": "^0.18.4",
-        "vimeo/psalm": "^5.8"
+        "vimeo/psalm": "^5.9"
     },
     "conflict": {
         "container-interop/container-interop": "<1.2.0",
