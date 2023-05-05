@@ -55,7 +55,7 @@ use const E_WARNING;
  * @psalm-type FastRouteFoundResult = array{
  *     0: Dispatcher::FOUND,
  *     1: non-empty-string,
- *     2: list<string, mixed>
+ *     2: array<string, mixed>
  * }
  * @psalm-type FastRouteResult = FastRouteNotFoundResult|FastRouteBadMethodResult|FastRouteFoundResult
  */
