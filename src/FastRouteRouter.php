@@ -367,7 +367,7 @@ class FastRouteRouter implements RouterInterface
      */
     private function getDispatcher($data): Dispatcher
     {
-        if (! $this->dispatcherCallback) {
+        if ($this->dispatcherCallback === null) {
             $this->dispatcherCallback = $this->createDispatcherCallback();
         }
 
