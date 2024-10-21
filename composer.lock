@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "967cd4495afe81100b833bc4a26e26eb",
+    "content-hash": "debef9cc752a71072b0425f3f886f5d7",
     "packages": [
         {
             "name": "fig/http-message-util",
@@ -123,21 +123,21 @@
         },
         {
             "name": "mezzio/mezzio-router",
-            "version": "3.17.0",
+            "version": "3.18.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/mezzio/mezzio-router.git",
-                "reference": "78573e16144a70ccf02039e1a2600788119c0dbb"
+                "reference": "75e9a3e636ee69f3a51006772cf29c00cb5da675"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/mezzio/mezzio-router/zipball/78573e16144a70ccf02039e1a2600788119c0dbb",
-                "reference": "78573e16144a70ccf02039e1a2600788119c0dbb",
+                "url": "https://api.github.com/repos/mezzio/mezzio-router/zipball/75e9a3e636ee69f3a51006772cf29c00cb5da675",
+                "reference": "75e9a3e636ee69f3a51006772cf29c00cb5da675",
                 "shasum": ""
             },
             "require": {
                 "fig/http-message-util": "^1.1.5",
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
                 "psr/container": "^1.1.2 || ^2.0",
                 "psr/http-factory": "^1.0.2",
                 "psr/http-message": "^1.0.1 || ^2.0.0",
@@ -150,12 +150,12 @@
             },
             "require-dev": {
                 "laminas/laminas-coding-standard": "~2.5.0",
-                "laminas/laminas-diactoros": "^3.3.0",
-                "laminas/laminas-servicemanager": "^3.22.1",
-                "laminas/laminas-stratigility": "^3.11.0",
-                "phpunit/phpunit": "^10.4.2",
-                "psalm/plugin-phpunit": "^0.18.4",
-                "vimeo/psalm": "^5.15"
+                "laminas/laminas-diactoros": "^3.4.0",
+                "laminas/laminas-servicemanager": "^4.2.0",
+                "laminas/laminas-stratigility": "^4.0.2",
+                "phpunit/phpunit": "^10.5.36",
+                "psalm/plugin-phpunit": "^0.19.0",
+                "vimeo/psalm": "^5.26.1"
             },
             "suggest": {
                 "mezzio/mezzio-aurarouter": "^3.0 to use the Aura.Router routing adapter",
@@ -201,7 +201,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2023-10-31T17:23:17+00:00"
+            "time": "2024-10-16T21:18:01+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -1378,22 +1378,25 @@
         },
         {
             "name": "laminas/laminas-diactoros",
-            "version": "3.4.0",
+            "version": "3.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laminas/laminas-diactoros.git",
-                "reference": "2cce7e77ca4c6c4183e9e8d4edeba483afc14487"
+                "reference": "143a16306602ce56b8b092a7914fef03c37f9ed2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/2cce7e77ca4c6c4183e9e8d4edeba483afc14487",
-                "reference": "2cce7e77ca4c6c4183e9e8d4edeba483afc14487",
+                "url": "https://api.github.com/repos/laminas/laminas-diactoros/zipball/143a16306602ce56b8b092a7914fef03c37f9ed2",
+                "reference": "143a16306602ce56b8b092a7914fef03c37f9ed2",
                 "shasum": ""
             },
             "require": {
-                "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
-                "psr/http-factory": "^1.0.2",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0",
+                "psr/http-factory": "^1.1",
                 "psr/http-message": "^1.1 || ^2.0"
+            },
+            "conflict": {
+                "amphp/amp": "<2.6.4"
             },
             "provide": {
                 "psr/http-factory-implementation": "^1.0",
@@ -1407,9 +1410,9 @@
                 "http-interop/http-factory-tests": "^2.2.0",
                 "laminas/laminas-coding-standard": "~2.5.0",
                 "php-http/psr7-integration-tests": "^1.4.0",
-                "phpunit/phpunit": "^10.5.31",
+                "phpunit/phpunit": "^10.5.36",
                 "psalm/plugin-phpunit": "^0.19.0",
-                "vimeo/psalm": "^5.25.0"
+                "vimeo/psalm": "^5.26.1"
             },
             "type": "library",
             "extra": {
@@ -1459,7 +1462,7 @@
                     "type": "community_bridge"
                 }
             ],
-            "time": "2024-09-11T00:55:07+00:00"
+            "time": "2024-10-14T11:59:49+00:00"
         },
         {
             "name": "laminas/laminas-escaper",
@@ -2470,16 +2473,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "10.5.36",
+            "version": "10.5.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870"
+                "reference": "c7cffa0efa2b70c22366523e6d804c9419eb2400"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870",
-                "reference": "aa0a8ce701ea7ee314b0dfaa8970dc94f3f8c870",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c7cffa0efa2b70c22366523e6d804c9419eb2400",
+                "reference": "c7cffa0efa2b70c22366523e6d804c9419eb2400",
                 "shasum": ""
             },
             "require": {
@@ -2500,7 +2503,7 @@
                 "phpunit/php-timer": "^6.0.0",
                 "sebastian/cli-parser": "^2.0.1",
                 "sebastian/code-unit": "^2.0.0",
-                "sebastian/comparator": "^5.0.2",
+                "sebastian/comparator": "^5.0.3",
                 "sebastian/diff": "^5.1.1",
                 "sebastian/environment": "^6.1.0",
                 "sebastian/exporter": "^5.1.2",
@@ -2551,7 +2554,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/phpunit/issues",
                 "security": "https://github.com/sebastianbergmann/phpunit/security/policy",
-                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.36"
+                "source": "https://github.com/sebastianbergmann/phpunit/tree/10.5.37"
             },
             "funding": [
                 {
@@ -2567,7 +2570,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-10-08T15:36:51+00:00"
+            "time": "2024-10-19T13:03:41+00:00"
         },
         {
             "name": "psalm/plugin-phpunit",
@@ -2849,16 +2852,16 @@
         },
         {
             "name": "sebastian/comparator",
-            "version": "5.0.2",
+            "version": "5.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/comparator.git",
-                "reference": "2d3e04c3b4c1e84a5e7382221ad8883c8fbc4f53"
+                "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/2d3e04c3b4c1e84a5e7382221ad8883c8fbc4f53",
-                "reference": "2d3e04c3b4c1e84a5e7382221ad8883c8fbc4f53",
+                "url": "https://api.github.com/repos/sebastianbergmann/comparator/zipball/a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
+                "reference": "a18251eb0b7a2dcd2f7aa3d6078b18545ef0558e",
                 "shasum": ""
             },
             "require": {
@@ -2869,7 +2872,7 @@
                 "sebastian/exporter": "^5.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^10.4"
+                "phpunit/phpunit": "^10.5"
             },
             "type": "library",
             "extra": {
@@ -2914,7 +2917,7 @@
             "support": {
                 "issues": "https://github.com/sebastianbergmann/comparator/issues",
                 "security": "https://github.com/sebastianbergmann/comparator/security/policy",
-                "source": "https://github.com/sebastianbergmann/comparator/tree/5.0.2"
+                "source": "https://github.com/sebastianbergmann/comparator/tree/5.0.3"
             },
             "funding": [
                 {
@@ -2922,7 +2925,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-08-12T06:03:08+00:00"
+            "time": "2024-10-18T14:56:07+00:00"
         },
         {
             "name": "sebastian/complexity",
@@ -4680,21 +4683,21 @@
         },
         {
             "name": "webimpress/coding-standard",
-            "version": "1.3.2",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webimpress/coding-standard.git",
-                "reference": "710f71ac95d36d931e76b47132b599c39abfab11"
+                "reference": "6f6a1a90bd9e18fc8bee0660dd1d1ce68cf9fc53"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webimpress/coding-standard/zipball/710f71ac95d36d931e76b47132b599c39abfab11",
-                "reference": "710f71ac95d36d931e76b47132b599c39abfab11",
+                "url": "https://api.github.com/repos/webimpress/coding-standard/zipball/6f6a1a90bd9e18fc8bee0660dd1d1ce68cf9fc53",
+                "reference": "6f6a1a90bd9e18fc8bee0660dd1d1ce68cf9fc53",
                 "shasum": ""
             },
             "require": {
                 "php": "^7.3 || ^8.0",
-                "squizlabs/php_codesniffer": "^3.7.2"
+                "squizlabs/php_codesniffer": "^3.10.3"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.6.15"
@@ -4723,7 +4726,7 @@
             ],
             "support": {
                 "issues": "https://github.com/webimpress/coding-standard/issues",
-                "source": "https://github.com/webimpress/coding-standard/tree/1.3.2"
+                "source": "https://github.com/webimpress/coding-standard/tree/1.4.0"
             },
             "funding": [
                 {
@@ -4731,18 +4734,18 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-18T07:25:41+00:00"
+            "time": "2024-10-16T06:55:17+00:00"
         }
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": "~8.1.0 || ~8.2.0 || ~8.3.0 || ~8.4.0"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.1.99"
     },
