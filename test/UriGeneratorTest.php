@@ -14,7 +14,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Http\Server\MiddlewareInterface;
 use Throwable;
 
-class UriGeneratorTest extends TestCase
+final class UriGeneratorTest extends TestCase
 {
     private FastRouteRouter $router;
 

@@ -40,6 +40,7 @@ use const E_WARNING;
 /**
  * Router implementation bridging nikic/fast-route.
  *
+ * @final
  * @psalm-type FastRouteConfig = array{
  *     cache_enabled?: bool,
  *     cache_file?: string,

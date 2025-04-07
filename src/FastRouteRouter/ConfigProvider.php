@@ -8,6 +8,7 @@ use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\FastRouteRouterFactory;
 use Mezzio\Router\RouterInterface;
 
+/** @final */
 class ConfigProvider
 {
     /**

@@ -9,7 +9,7 @@ use Mezzio\Router\FastRouteRouter;
 use Mezzio\Router\RouterInterface;
 use Mezzio\Router\Test\AbstractImplicitMethodsIntegrationTest as RouterIntegrationTest;
 
-class ImplicitMethodsIntegrationTest extends RouterIntegrationTest
+final class ImplicitMethodsIntegrationTest extends RouterIntegrationTest
 {
     /**
      * @return FastRouteRouter
