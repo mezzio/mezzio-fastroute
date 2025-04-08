@@ -1,43 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<files psalm-version="5.11.0@c9b192ab8400fdaf04b2b13d110575adc879aa90">
+<files psalm-version="6.10.0@9c0add4eb88d4b169ac04acb7c679918cbb9c252">
   <file src="src/FastRouteRouter.php">
     <InvalidArgument>
-      <code>static function (): void {
-        }</code>
+      <code><![CDATA[static function (): void {
+        }]]></code>
     </InvalidArgument>
     <MixedArgument>
-      <code>$part[0]</code>
-      <code>$part[1]</code>
+      <code><![CDATA[$part[0]]]></code>
+      <code><![CDATA[$part[1]]]></code>
     </MixedArgument>
     <MixedArgumentTypeCoercion>
-      <code>$missingParameters</code>
-      <code>$params</code>
+      <code><![CDATA[$missingParameters]]></code>
+      <code><![CDATA[$params]]></code>
     </MixedArgumentTypeCoercion>
     <MixedArrayAccess>
-      <code>$part[0]</code>
-      <code>$part[0]</code>
-      <code>$part[0]</code>
-      <code>$part[0]</code>
-      <code>$part[1]</code>
-      <code>$part[1]</code>
+      <code><![CDATA[$part[0]]]></code>
+      <code><![CDATA[$part[0]]]></code>
+      <code><![CDATA[$part[0]]]></code>
+      <code><![CDATA[$part[0]]]></code>
+      <code><![CDATA[$part[1]]]></code>
+      <code><![CDATA[$part[1]]]></code>
     </MixedArrayAccess>
     <MixedArrayOffset>
-      <code>$substitutions[$param]</code>
-      <code>$substitutions[$part[0]]</code>
-      <code>$substitutions[$part[0]]</code>
+      <code><![CDATA[$substitutions[$param]]]></code>
+      <code><![CDATA[$substitutions[$part[0]]]]></code>
+      <code><![CDATA[$substitutions[$part[0]]]]></code>
     </MixedArrayOffset>
     <MixedAssignment>
-      <code>$missingParameters[]</code>
-      <code>$param</code>
-      <code>$part</code>
-      <code>$part</code>
+      <code><![CDATA[$missingParameters[]]]></code>
+      <code><![CDATA[$param]]></code>
+      <code><![CDATA[$part]]></code>
+      <code><![CDATA[$part]]></code>
     </MixedAssignment>
     <MixedOperand>
-      <code>$part[1]</code>
-      <code>$substitutions[$part[0]]</code>
+      <code><![CDATA[$part[1]]]></code>
+      <code><![CDATA[$substitutions[$part[0]]]]></code>
     </MixedOperand>
     <PossiblyUndefinedArrayOffset>
-      <code>$result[1]</code>
+      <code><![CDATA[$result[1]]]></code>
     </PossiblyUndefinedArrayOffset>
     <RedundantCastGivenDocblockType>
       <code><![CDATA[(array) $this->router->getData()]]></code>
@@ -46,16 +46,13 @@
       <code><![CDATA[include $this->cacheFile]]></code>
     </UnresolvableInclude>
     <UnusedReturnValue>
-      <code>int|false</code>
+      <code><![CDATA[int|false]]></code>
     </UnusedReturnValue>
   </file>
   <file src="test/ExceptionTest.php">
     <PossiblyFalseOperand>
       <code><![CDATA[strrpos(ExceptionInterface::class, '\\')]]></code>
     </PossiblyFalseOperand>
-    <PossiblyUnusedMethod>
-      <code>exceptionProvider</code>
-    </PossiblyUnusedMethod>
   </file>
   <file src="test/FastRouteRouterFactoryTest.php">
     <MissingClosureReturnType>
@@ -83,22 +80,15 @@
       <code><![CDATA[fn() => $this->routesToInject]]></code>
     </MissingClosureReturnType>
     <MixedArgument>
-      <code>$routesToInject</code>
+      <code><![CDATA[$routesToInject]]></code>
     </MixedArgument>
     <MixedAssignment>
-      <code>$routesToInject</code>
+      <code><![CDATA[$routesToInject]]></code>
     </MixedAssignment>
     <PossiblyNullFunctionCall>
       <code><![CDATA[Closure::bind(fn() => $this->router, $router, FastRouteRouter::class)()]]></code>
       <code><![CDATA[Closure::bind(fn() => $this->routesToInject, $router, FastRouteRouter::class)()]]></code>
     </PossiblyNullFunctionCall>
-    <PossiblyUnusedMethod>
-      <code>generatedUriProvider</code>
-      <code>idemPotentMethods</code>
-      <code>matchWithUrlEncodedSpecialCharsDataProvider</code>
-      <code>uriGeneratorDataProvider</code>
-      <code>uriGeneratorWithPartialDefaultsDataProvider</code>
-    </PossiblyUnusedMethod>
     <UndefinedThisPropertyFetch>
       <code><![CDATA[$this->router]]></code>
       <code><![CDATA[$this->routesToInject]]></code>
@@ -106,12 +96,10 @@
   </file>
   <file src="test/UriGeneratorTest.php">
     <ArgumentTypeCoercion>
-      <code>$path</code>
+      <code><![CDATA[$path]]></code>
     </ArgumentTypeCoercion>
     <PossiblyUnusedMethod>
-      <code>exceptionalRoutes</code>
-      <code>provideRouteTests</code>
-      <code>provideRoutes</code>
+      <code><![CDATA[provideRoutes]]></code>
     </PossiblyUnusedMethod>
   </file>
 </files>

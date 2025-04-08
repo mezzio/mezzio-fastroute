@@ -25,6 +25,7 @@ use function is_array;
  * </code>
  *
  * @psalm-import-type FastRouteConfig from FastRouteRouter
+ * @final
  */
 class FastRouteRouterFactory
 {

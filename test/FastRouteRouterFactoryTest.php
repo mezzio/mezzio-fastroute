@@ -11,7 +11,7 @@ use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
-class FastRouteRouterFactoryTest extends TestCase
+final class FastRouteRouterFactoryTest extends TestCase
 {
     private FastRouteRouterFactory $factory;
 

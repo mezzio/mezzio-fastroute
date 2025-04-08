@@ -34,7 +34,7 @@ use function is_file;
 use function unlink;
 
 /** @psalm-import-type FastRouteConfig from FastRouteRouter */
-class FastRouteRouterTest extends TestCase
+final class FastRouteRouterTest extends TestCase
 {
     /** @var RouteCollector&MockObject */
     private RouteCollector $fastRouter;
