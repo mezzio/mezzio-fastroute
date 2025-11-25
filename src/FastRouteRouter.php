@@ -4,9 +4,14 @@ declare(strict_types=1);
 
 namespace Mezzio\Router;
 
+use FastRoute\ConfigureRoutes;
+use FastRoute\DataGenerator;
 use FastRoute\DataGenerator\GroupCountBased as RouteGenerator;
 use FastRoute\Dispatcher;
 use FastRoute\Dispatcher\GroupCountBased;
+use FastRoute\Dispatcher\Result\Matched;
+use FastRoute\Dispatcher\Result\MethodNotAllowed;
+use FastRoute\Dispatcher\Result\NotMatched;
 use FastRoute\RouteCollector;
 use FastRoute\RouteParser\Std as RouteParser;
 use Fig\Http\Message\RequestMethodInterface as RequestMethod;
@@ -46,19 +51,7 @@ use const E_WARNING;
  *     cache_file?: string,
  *     ...
  * }
- * @psalm-type FastRouteNotFoundResult = array{
- *     0: Dispatcher::NOT_FOUND,
- * }
- * @psalm-type FastRouteBadMethodResult = array{
- *     0: Dispatcher::METHOD_NOT_ALLOWED,
- *     1: list<non-empty-string>,
- * }
- * @psalm-type FastRouteFoundResult = array{
- *     0: Dispatcher::FOUND,
- *     1: non-empty-string,
- *     2: array<string, mixed>
- * }
- * @psalm-type FastRouteResult = FastRouteNotFoundResult|FastRouteBadMethodResult|FastRouteFoundResult
+ * @psalm-import-type RouteData from DataGenerator
  */
 class FastRouteRouter implements RouterInterface
 {
@@ -104,11 +97,13 @@ class FastRouteRouter implements RouterInterface
      */
     private string $cacheFile = 'data/cache/fastroute.php.cache';
 
-    /** @var callable(array|object): Dispatcher|null A factory callback that can return a dispatcher. */
+    /** @var callable(RouteData): Dispatcher|null A factory callback that can return a dispatcher. */
     private $dispatcherCallback;
 
     /**
      * Cached data used by the dispatcher.
+     *
+     * @var RouteData|array<never, never>
      */
     private array $dispatchData = [];
 
@@ -121,7 +116,7 @@ class FastRouteRouter implements RouterInterface
     /**
      * FastRoute router
      */
-    private ?RouteCollector $router = null;
+    private ?ConfigureRoutes $router = null;
 
     /**
      * All attached routes as Route instances
@@ -149,7 +144,7 @@ class FastRouteRouter implements RouterInterface
      *   RouteGenerator.
      * - A callable that returns a GroupCountBased dispatcher will be created.
      *
-     * @param null|RouteCollector $router If not provided, a default
+     * @param null|RouteCollector|ConfigureRoutes $router If not provided, a default
      *     implementation will be used.
      * @param null|callable(array|object): Dispatcher $dispatcherFactory Callable that will return a
      *     FastRoute dispatcher.
@@ -157,7 +152,7 @@ class FastRouteRouter implements RouterInterface
      * @psalm-param FastRouteConfig $config
      */
     public function __construct(
-        ?RouteCollector $router = null,
+        ConfigureRoutes|RouteCollector|null $router = null,
         ?callable $dispatcherFactory = null,
         ?array $config = null
     ) {
@@ -219,13 +214,10 @@ class FastRouteRouter implements RouterInterface
         $dispatcher = $this->getDispatcher($dispatchData);
         $result     = $dispatcher->dispatch($method, $path);
 
-        if ($result[0] !== Dispatcher::FOUND) {
-            /** @psalm-var FastRouteNotFoundResult|FastRouteBadMethodResult $result */
-
+        if (! $result instanceof Matched) {
             return $this->marshalFailedRoute($result);
         }
 
-        /** @psalm-var FastRouteFoundResult $result */
         return $this->marshalMatchedRoute($result, $method);
     }
 
@@ -364,9 +356,9 @@ class FastRouteRouter implements RouterInterface
      * (which should be derived from the router's getData() method); this
      * approach is done to allow testing against the dispatcher.
      *
-     * @param array|object $data Data from RouteCollection::getData()
+     * @param RouteData $data Data from {@link ConfigureRoutes::processedRoutes()}
      */
-    private function getDispatcher($data): Dispatcher
+    private function getDispatcher(array $data): Dispatcher
     {
         if ($this->dispatcherCallback === null) {
             $this->dispatcherCallback = $this->createDispatcherCallback();
@@ -380,11 +372,11 @@ class FastRouteRouter implements RouterInterface
     /**
      * Return a default implementation of a callback that can return a Dispatcher.
      *
-     * @return callable(array|object): GroupCountBased
+     * @return callable(RouteData): GroupCountBased
      */
     private function createDispatcherCallback(): callable
     {
-        return static fn($data): GroupCountBased => new GroupCountBased($data);
+        return static fn(array $data): GroupCountBased => new GroupCountBased($data);
     }
 
     /**
@@ -392,13 +384,11 @@ class FastRouteRouter implements RouterInterface
      *
      * If the failure was due to the HTTP method, passes the allowed HTTP
      * methods to the factory.
-     *
-     * @param FastRouteNotFoundResult|FastRouteBadMethodResult $result
      */
-    private function marshalFailedRoute(array $result): RouteResult
+    private function marshalFailedRoute(MethodNotAllowed|NotMatched $result): RouteResult
     {
-        if ($result[0] === Dispatcher::METHOD_NOT_ALLOWED) {
-            return RouteResult::fromRouteFailure($result[1]);
+        if ($result instanceof MethodNotAllowed) {
+            return RouteResult::fromRouteFailure($result->allowedMethods);
         }
 
         return RouteResult::fromRouteFailure(Route::HTTP_METHOD_ANY);
@@ -406,12 +396,11 @@ class FastRouteRouter implements RouterInterface
 
     /**
      * Marshals a route result based on the results of matching and the current HTTP method.
-     *
-     * @param FastRouteFoundResult $result
      */
-    private function marshalMatchedRoute(array $result, string $method): RouteResult
+    private function marshalMatchedRoute(Matched $result, string $method): RouteResult
     {
-        $path  = $result[1];
+        $path = $result->handler;
+        assert(is_string($path));
         $route = array_reduce(
             $this->routes,
             static function (Route|false $matched, Route $route) use ($path, $method): Route|false {
@@ -436,7 +425,7 @@ class FastRouteRouter implements RouterInterface
             return $this->marshalMethodNotAllowedResult($result);
         }
 
-        $params = $result[2];
+        $params = $result->variables;
 
         $options = $route->getOptions();
         if (isset($options['defaults']) && is_array($options['defaults'])) {
@@ -476,7 +465,7 @@ class FastRouteRouter implements RouterInterface
             $methods = self::HTTP_METHODS_STANDARD;
         }
 
-        assert($this->router instanceof RouteCollector);
+        assert($this->router instanceof ConfigureRoutes);
 
         $this->router->addRoute($methods, $route->getPath(), $route->getPath());
     }
@@ -486,16 +475,20 @@ class FastRouteRouter implements RouterInterface
      * FastRoute data generator.
      *
      * If caching is enabled, store the freshly generated data to file.
+     *
+     * @return RouteData
      */
     private function getDispatchData(): array
     {
         if ($this->hasCache) {
+            /** @psalm-var RouteData */
             return $this->dispatchData;
         }
 
-        assert($this->router instanceof RouteCollector);
+        assert($this->router instanceof ConfigureRoutes);
 
-        $dispatchData = (array) $this->router->getData();
+        /** @psalm-var RouteData $dispatchData Not quite accurate because the returned data has an extra key */
+        $dispatchData = $this->router->processedRoutes();
 
         if ($this->cacheEnabled) {
             $this->cacheDispatchData($dispatchData);
@@ -528,6 +521,8 @@ class FastRouteRouter implements RouterInterface
                 $this->cacheFile
             ));
         }
+
+        /** @psalm-var RouteData $dispatchData Psalm cannot infer what comes out of the cache */
 
         $this->hasCache     = true;
         $this->dispatchData = $dispatchData;
@@ -575,10 +570,10 @@ class FastRouteRouter implements RouterInterface
         );
     }
 
-    /** @param FastRouteFoundResult $result */
-    private function marshalMethodNotAllowedResult(array $result): RouteResult
+    private function marshalMethodNotAllowedResult(Matched $result): RouteResult
     {
-        $path           = $result[1];
+        $path = $result->handler;
+        assert(is_string($path));
         $allowedMethods = array_reduce(
             $this->routes,
             /**

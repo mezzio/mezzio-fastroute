@@ -5,7 +5,11 @@ declare(strict_types=1);
 namespace MezzioTest\Router;
 
 use Closure;
+use FastRoute\ConfigureRoutes;
 use FastRoute\Dispatcher;
+use FastRoute\Dispatcher\Result\Matched;
+use FastRoute\Dispatcher\Result\MethodNotAllowed;
+use FastRoute\Dispatcher\Result\NotMatched;
 use FastRoute\RouteCollector;
 use Fig\Http\Message\RequestMethodInterface as RequestMethod;
 use Laminas\Diactoros\Response\TextResponse;
@@ -36,16 +40,14 @@ use function unlink;
 /** @psalm-import-type FastRouteConfig from FastRouteRouter */
 final class FastRouteRouterTest extends TestCase
 {
-    /** @var RouteCollector&MockObject */
-    private RouteCollector $fastRouter;
-    /** @var Dispatcher&MockObject */
-    private Dispatcher $dispatcher;
+    private ConfigureRoutes&MockObject $fastRouter;
+    private Dispatcher&MockObject $dispatcher;
     /** @var Closure(): Dispatcher */
     private Closure $dispatchCallback;
 
     protected function setUp(): void
     {
-        $this->fastRouter       = $this->createMock(RouteCollector::class);
+        $this->fastRouter       = $this->createMock(ConfigureRoutes::class);
         $this->dispatcher       = $this->createMock(Dispatcher::class);
         $this->dispatchCallback = fn(): Dispatcher => $this->dispatcher;
     }
@@ -54,7 +56,7 @@ final class FastRouteRouterTest extends TestCase
     {
         return new FastRouteRouter(
             $this->fastRouter,
-            $this->dispatchCallback
+            $this->dispatchCallback,
         );
     }
 
@@ -97,14 +99,12 @@ final class FastRouteRouterTest extends TestCase
             ->with([RequestMethod::METHOD_GET], '/foo', '/foo');
 
         $this->fastRouter->expects(self::once())
-            ->method('getData');
+            ->method('processedRoutes');
 
         $this->dispatcher->expects(self::once())
             ->method('dispatch')
             ->with(RequestMethod::METHOD_GET, '/foo')
-            ->willReturn([
-                Dispatcher::NOT_FOUND,
-            ]);
+            ->willReturn($this->notFound());
 
         $router = $this->getRouter();
         $router->addRoute($route);
@@ -137,7 +137,7 @@ final class FastRouteRouterTest extends TestCase
             ->with(
                 FastRouteRouter::HTTP_METHODS_STANDARD,
                 '/foo',
-                '/foo'
+                '/foo',
             );
 
         $router = $this->getRouter();
@@ -159,24 +159,20 @@ final class FastRouteRouterTest extends TestCase
         $uri     = new Uri('/foo');
         $request = (new ServerRequestFactory())->createServerRequest(
             RequestMethod::METHOD_GET,
-            $uri
+            $uri,
         );
 
         $this->dispatcher->expects(self::once())
             ->method('dispatch')
             ->with(RequestMethod::METHOD_GET, '/foo')
-            ->willReturn([
-                Dispatcher::FOUND,
-                '/foo',
-                ['bar' => 'baz'],
-            ]);
+            ->willReturn($this->successResult('/foo', ['bar' => 'baz']));
 
         $this->fastRouter->expects(self::once())
             ->method('addRoute')
             ->with([RequestMethod::METHOD_GET], '/foo', '/foo');
 
         $this->fastRouter->expects(self::once())
-            ->method('getData');
+            ->method('processedRoutes');
 
         $router = $this->getRouter();
         $router->addRoute($route); // Must add, so we can determine middleware later
@@ -226,7 +222,7 @@ final class FastRouteRouterTest extends TestCase
     public function testMatchWithUrlEncodedSpecialChars(
         string $routePath,
         string $requestPath,
-        string $expectedId
+        string $expectedId,
     ): void {
         $request = $this->createServerRequest($requestPath, RequestMethod::METHOD_GET);
 
@@ -241,7 +237,7 @@ final class FastRouteRouterTest extends TestCase
         self::assertSame('foo', $routeResult->getMatchedRouteName());
         self::assertSame(
             ['id' => $expectedId],
-            $routeResult->getMatchedParams()
+            $routeResult->getMatchedParams(),
         );
     }
 
@@ -258,7 +254,7 @@ final class FastRouteRouterTest extends TestCase
 
     #[DataProvider('idemPotentMethods')]
     public function testRouteNotSpecifyingOptionsImpliesOptionsIsSupportedAndMatchesWhenGetOrHeadIsAllowed(
-        string $method
+        string $method,
     ): void {
         $route = new Route('/foo', self::getMiddleware(), [RequestMethod::METHOD_POST, $method]);
 
@@ -334,17 +330,14 @@ final class FastRouteRouterTest extends TestCase
         $this->dispatcher->expects(self::once())
             ->method('dispatch')
             ->with(RequestMethod::METHOD_GET, '/foo')
-            ->willReturn([
-                Dispatcher::METHOD_NOT_ALLOWED,
-                [RequestMethod::METHOD_POST],
-            ]);
+            ->willReturn($this->methodNotAllowed([RequestMethod::METHOD_POST]));
 
         $this->fastRouter->expects(self::once())
             ->method('addRoute')
             ->with([RequestMethod::METHOD_POST], '/foo', '/foo');
 
         $this->fastRouter->expects(self::once())
-            ->method('getData');
+            ->method('processedRoutes');
 
         $router = $this->getRouter();
         $router->addRoute($route); // Must add, so we can determine middleware later
@@ -363,22 +356,20 @@ final class FastRouteRouterTest extends TestCase
 
         $request = (new ServerRequestFactory())->createServerRequest(
             RequestMethod::METHOD_GET,
-            $uri
+            $uri,
         );
 
         $this->dispatcher->expects(self::once())
             ->method('dispatch')
             ->with(RequestMethod::METHOD_GET, '/bar')
-            ->willReturn([
-                Dispatcher::NOT_FOUND,
-            ]);
+            ->willReturn($this->notFound());
 
         $this->fastRouter->expects(self::once())
             ->method('addRoute')
             ->with([RequestMethod::METHOD_GET], '/foo', '/foo');
 
         $this->fastRouter->expects(self::once())
-            ->method('getData');
+            ->method('processedRoutes');
 
         $router = $this->getRouter();
         $router->addRoute($route); // Must add, so we can determine middleware later
@@ -451,7 +442,7 @@ final class FastRouteRouterTest extends TestCase
             '/page[/{page:\d+}/{locale:[a-z]{2}}[/optional-{extra:\w+}]]',
             self::getMiddleware(),
             [RequestMethod::METHOD_GET],
-            'limit'
+            'limit',
         );
         $route->setOptions([
             'defaults' => [
@@ -480,7 +471,7 @@ final class FastRouteRouterTest extends TestCase
             '/page[/{page:\d+}/{locale:[a-z]{2}}[/optional-{extra:\w+}]]',
             self::getMiddleware(),
             [RequestMethod::METHOD_GET],
-            'limit'
+            'limit',
         );
         $route->setOptions([
             'defaults' => 'invalid value for defaults',
@@ -501,24 +492,20 @@ final class FastRouteRouterTest extends TestCase
 
         $request = (new ServerRequestFactory())->createServerRequest(
             RequestMethod::METHOD_GET,
-            $uri
+            $uri,
         );
 
         $this->dispatcher->expects(self::once())
             ->method('dispatch')
             ->with(RequestMethod::METHOD_GET, '/foo')
-            ->willReturn([
-                Dispatcher::FOUND,
-                '/foo',
-                ['bar' => 'baz'],
-            ]);
+            ->willReturn($this->successResult('/foo', ['bar' => 'baz']));
 
         $this->fastRouter->expects(self::once())
             ->method('addRoute')
             ->with([RequestMethod::METHOD_GET], '/foo', '/foo');
 
         $this->fastRouter->expects(self::once())
-            ->method('getData');
+            ->method('processedRoutes');
 
         $router = $this->getRouter();
         $router->addRoute($route); // Must add, so we can determine middleware later
@@ -571,7 +558,7 @@ final class FastRouteRouterTest extends TestCase
     #[DataProvider('uriGeneratorDataProvider')]
     public function testUriGenerationSubstitutionsWithDefaultsAndOptionalParameters(
         string $expectedUri,
-        array $params
+        array $params,
     ): void {
         $router = new FastRouteRouter();
 
@@ -614,7 +601,7 @@ final class FastRouteRouterTest extends TestCase
     #[DataProvider('uriGeneratorWithPartialDefaultsDataProvider')]
     public function testUriGenerationSubstitutionsWithPartialDefaultsAndOptionalParameters(
         string $expectedUri,
-        array $params
+        array $params,
     ): void {
         $router = new FastRouteRouter();
 
@@ -641,7 +628,7 @@ final class FastRouteRouterTest extends TestCase
 
     private function createServerRequest(
         string $path,
-        string $method = RequestMethod::METHOD_GET
+        string $method = RequestMethod::METHOD_GET,
     ): ServerRequestInterface {
         $uri = new Uri($path);
 
@@ -729,7 +716,7 @@ final class FastRouteRouterTest extends TestCase
             ['REQUEST_METHOD' => RequestMethod::METHOD_GET],
             [],
             '/foo/my-id',
-            RequestMethod::METHOD_GET
+            RequestMethod::METHOD_GET,
         );
 
         $result = $router->match($request);
@@ -751,7 +738,7 @@ final class FastRouteRouterTest extends TestCase
             ['REQUEST_METHOD' => RequestMethod::METHOD_GET],
             [],
             '/foo/var',
-            RequestMethod::METHOD_GET
+            RequestMethod::METHOD_GET,
         );
 
         $result = $router->match($request);
@@ -774,7 +761,7 @@ final class FastRouteRouterTest extends TestCase
             ['REQUEST_METHOD' => RequestMethod::METHOD_GET],
             [],
             '/bar',
-            RequestMethod::METHOD_GET
+            RequestMethod::METHOD_GET,
         );
 
         $result = $router->match($request);
@@ -797,7 +784,7 @@ final class FastRouteRouterTest extends TestCase
             ['REQUEST_METHOD' => RequestMethod::METHOD_GET],
             [],
             '/foo',
-            RequestMethod::METHOD_GET
+            RequestMethod::METHOD_GET,
         );
 
         $this->expectException(InvalidCacheDirectoryException::class);
@@ -819,7 +806,7 @@ final class FastRouteRouterTest extends TestCase
             ['REQUEST_METHOD' => RequestMethod::METHOD_GET],
             [],
             '/foo',
-            RequestMethod::METHOD_GET
+            RequestMethod::METHOD_GET,
         );
 
         $this->expectException(InvalidCacheDirectoryException::class);
@@ -841,7 +828,7 @@ final class FastRouteRouterTest extends TestCase
             ['REQUEST_METHOD' => RequestMethod::METHOD_GET],
             [],
             '/foo',
-            RequestMethod::METHOD_GET
+            RequestMethod::METHOD_GET,
         );
 
         $this->expectException(InvalidCacheException::class);
@@ -878,7 +865,7 @@ final class FastRouteRouterTest extends TestCase
             ['REQUEST_METHOD' => RequestMethod::METHOD_HEAD],
             [],
             '/bar',
-            RequestMethod::METHOD_HEAD
+            RequestMethod::METHOD_HEAD,
         );
 
         $result = $router->match($request);
@@ -887,7 +874,7 @@ final class FastRouteRouterTest extends TestCase
         self::assertTrue($result->isFailure());
         self::assertSame(
             [RequestMethod::METHOD_GET, RequestMethod::METHOD_POST, RequestMethod::METHOD_DELETE],
-            $result->getAllowedMethods()
+            $result->getAllowedMethods(),
         );
     }
 
@@ -898,11 +885,7 @@ final class FastRouteRouterTest extends TestCase
         $dispatcher->expects(self::once())
             ->method('dispatch')
             ->with(RequestMethod::METHOD_GET, '/foo')
-            ->willReturn([
-                Dispatcher::FOUND,
-                '/foo',
-                [],
-            ]);
+            ->willReturn($this->successResult('/foo'));
 
         $callable = fn(): Dispatcher => $dispatcher;
 
@@ -914,5 +897,37 @@ final class FastRouteRouterTest extends TestCase
 
         self::assertTrue($result->isSuccess());
         self::assertFalse($result->isFailure());
+    }
+
+    /**
+     * @psalm-suppress InaccessibleProperty
+     * @param array<string, string> $params
+     * @param array<string, scalar> $extra
+     */
+    private function successResult(string $path, array $params = [], array $extra = []): Matched
+    {
+        $result                  = new Matched();
+        $result->handler         = $path;
+        $result->variables       = $params;
+        $result->extraParameters = $extra;
+
+        return $result;
+    }
+
+    private function notFound(): NotMatched
+    {
+        return new NotMatched();
+    }
+
+    /**
+     * @psalm-suppress InaccessibleProperty
+     * @param non-empty-list<string> $allowed
+     */
+    private function methodNotAllowed(array $allowed): MethodNotAllowed
+    {
+        $result                 = new MethodNotAllowed();
+        $result->allowedMethods = $allowed;
+
+        return $result;
     }
 }
