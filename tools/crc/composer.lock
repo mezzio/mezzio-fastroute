@@ -152,16 +152,16 @@
         },
         {
             "name": "php-standard-library/php-standard-library",
-            "version": "6.2.1",
+            "version": "6.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-standard-library/php-standard-library.git",
-                "reference": "331f3ab363508825e62c42725f96c091bcceb970"
+                "reference": "13f1ca9de56f392513b9e511357079e52eec6cec"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-standard-library/php-standard-library/zipball/331f3ab363508825e62c42725f96c091bcceb970",
-                "reference": "331f3ab363508825e62c42725f96c091bcceb970",
+                "url": "https://api.github.com/repos/php-standard-library/php-standard-library/zipball/13f1ca9de56f392513b9e511357079e52eec6cec",
+                "reference": "13f1ca9de56f392513b9e511357079e52eec6cec",
                 "shasum": ""
             },
             "require": {
@@ -172,7 +172,7 @@
                 "ext-openssl": "*",
                 "ext-sodium": "*",
                 "php": "~8.4.0 || ~8.5.0",
-                "revolt/event-loop": "^1.0.8"
+                "revolt/event-loop": "^1.0.9"
             },
             "conflict": {
                 "azjezz/psl": "*"
@@ -253,12 +253,12 @@
                 "php-standard-library/vec": "self.version"
             },
             "require-dev": {
-                "carthage-software/mago": "^1.29.0",
+                "carthage-software/mago": "^1.50.0",
                 "ext-brotli": "*",
-                "infection/infection": "^0.32.6",
+                "infection/infection": "^0.32.7",
                 "php-coveralls/php-coveralls": "^2.9.1",
-                "phpbench/phpbench": "^1.6.0",
-                "phpunit/phpunit": "^13.0.5"
+                "phpbench/phpbench": "^1.7.0",
+                "phpunit/phpunit": "^13.1.14"
             },
             "suggest": {
                 "php-standard-library/phpstan-extension": "PHPStan integration",
@@ -270,7 +270,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-next": "6.2.x-dev"
+                    "dev-next": "6.3.x-dev"
                 }
             },
             "autoload": {
@@ -426,7 +426,7 @@
             "description": "PHP Standard Library",
             "support": {
                 "issues": "https://github.com/php-standard-library/php-standard-library/issues",
-                "source": "https://github.com/php-standard-library/php-standard-library/tree/6.2.1"
+                "source": "https://github.com/php-standard-library/php-standard-library/tree/6.3.0"
             },
             "funding": [
                 {
@@ -438,7 +438,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2026-05-23T22:30:15+00:00"
+            "time": "2026-09-25T15:54:11+00:00"
         },
         {
             "name": "psr/container",
