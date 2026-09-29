@@ -904,7 +904,7 @@ final class FastRouteRouterTest extends TestCase
                 [],
             ]);
 
-        $callable = fn(): Dispatcher => $dispatcher;
+        $callable = static fn(): Dispatcher => $dispatcher;
 
         $router = new FastRouteRouter(null, $callable);
         $router->addRoute($route1);
