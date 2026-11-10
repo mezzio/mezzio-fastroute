@@ -2,3 +2,9 @@
 /.phpunit.cache
 /phpunit.xml
 /vendor/
+/docs/html/
+/doc/html/
+/laminas-mkdoc-theme.tgz
+/laminas-mkdoc-theme/
+/documentation-theme/
+.markdownlint.json

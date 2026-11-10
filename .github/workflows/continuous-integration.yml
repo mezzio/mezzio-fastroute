@@ -8,7 +8,7 @@ on:
 
 env:
   php_extensions:
-  default_php: 8.4
+  default_php: '8.4'
 
 jobs:
   ci:
